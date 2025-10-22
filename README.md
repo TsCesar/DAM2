@@ -33,12 +33,12 @@ Sustituye los <placeholders> por tus datos reales cuando quieras.
 Plantilla de README para un repositorio de **códigos de clase** de 2º **Desarrollo de Aplicaciones Multiplataforma (DAM)**.  
 Incluye material de las siguientes asignaturas:
 
-- **Acceso a Datos (AD)**
-- **Computación Descentralizada y Blockchain (CDB)**
-- **Desarrollo de Interfaces (DI)**
-- **Programación de Servicios y Procesos (PSP)**
-- **Programación Multimedia y Dispositivos Móviles (PMDM)** — *curso destacado 25–26*
-- **Sistemas de Gestión Empresarial (SGE)**
+- **[Acceso a Datos (AD)](01-acceso-datos/README.md)**
+- **[Computación Descentralizada y Blockchain (CDB)](02-computacion-descentralizada-blockchain/README.md)**
+- **[Desarrollo de Interfaces (DI)](03-desarrollo-interfaces/README.md)**
+- **[Programación de Servicios y Procesos (PSP)](04-programacion-servicios-procesos/README.md)**
+- **[Programación Multimedia y Dispositivos Móviles (PMDM)](05-programacion-multimedia-moviles/README.md)** — *curso destacado 25–26*
+- **[Sistemas de Gestión Empresarial (SGE)](06-sistemas-gestion-empresarial/README.md)**
 
 > 💡 Usa este archivo como base: edita nombres, enlaces y ejemplos para tu grupo.
 
