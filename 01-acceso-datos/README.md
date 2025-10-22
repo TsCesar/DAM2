@@ -1,0 +1,23 @@
+# Acceso a Datos (AD)
+
+Persistencia, JDBC/JPA/Hibernate, ORM, SQL, XML/JSON, DAO/Repositorios.
+
+## Estructura
+```text
+01-acceso-datos/
+├─ ejemplos/
+├─ practicas/
+├─ resources/
+├─ scripts/
+└─ notas.md
+```
+
+## Enlaces rápidos
+- Volver al raíz: [../](../)
+- Documentación general: [../docs](../docs)
+
+## Prácticas
+- Añade aquí la lista de prácticas con enlace a sus carpetas.
+
+## Ejemplos
+- Añade aquí ejemplos con una breve descripción.
