@@ -19,12 +19,14 @@ Sustituye los <placeholders> por tus datos reales cuando quieras.
 </p>
 
 <p align="center">
-  <a href="#estructura"><img alt="Estructura" src="https://img.shields.io/badge/Estructura-del%20repo-607d8b?style=for-the-badge"></a>
-  <a href="#asignaturas"><img alt="Asignaturas" src="https://img.shields.io/badge/Asignaturas-6-ff9800?style=for-the-badge"></a>
-  <a href="#empezar-rápido"><img alt="Quickstart" src="https://img.shields.io/badge/Empezar-r%C3%A1pido-009688?style=for-the-badge"></a>
-  <a href="#convenciones"><img alt="Convenciones" src="https://img.shields.io/badge/Convenciones-%F0%9F%94%A7-3f51b5?style=for-the-badge"></a>
-  <a href="#contribuir"><img alt="Contribuir" src="https://img.shields.io/badge/Contribuir-%E2%AD%90-ff5722?style=for-the-badge"></a>
+  <a href="01-acceso-datos/README.md"><img src="https://img.shields.io/badge/01%20%E2%80%94%20Acceso%20a%20Datos-303f9f?style=for-the-badge" alt="Acceso a Datos"></a>
+  <a href="02-computacion-descentralizada-blockchain/README.md"><img src="https://img.shields.io/badge/02%20%E2%80%94%20CDB-00695c?style=for-the-badge" alt="Computación Descentralizada y Blockchain"></a>
+  <a href="03-desarrollo-interfaces/README.md"><img src="https://img.shields.io/badge/03%20%E2%80%94%20Desarrollo%20de%20Interfaces-512da8?style=for-the-badge" alt="Desarrollo de Interfaces"></a>
+  <a href="04-programacion-servicios-procesos/README.md"><img src="https://img.shields.io/badge/04%20%E2%80%94%20PSP-455a64?style=for-the-badge" alt="PSP"></a>
+  <a href="05-programacion-multimedia-moviles/README.md"><img src="https://img.shields.io/badge/05%20%E2%80%94%20PMDM-E91E63?style=for-the-badge" alt="PMDM"></a>
+  <a href="06-sistemas-gestion-empresarial/README.md"><img src="https://img.shields.io/badge/06%20%E2%80%94%20SGE-009688?style=for-the-badge" alt="SGE"></a>
 </p>
+
 
 ---
 
