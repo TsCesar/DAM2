@@ -1,0 +1,20 @@
+# IDEs
+.idea/
+.vscode/
+
+# Java/Kotlin/Gradle
+.gradle/
+build/
+out/
+*.iml
+local.properties
+
+# Logs
+*.log
+
+# Node (si algún módulo usa tooling web)
+node_modules/
+
+# Entornos
+.env
+*.env.local
