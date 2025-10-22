@@ -97,3 +97,14 @@ Incluye material de las siguientes asignaturas:
 │  └─ PULL_REQUEST_TEMPLATE.md
 └─ README.md
 
+
+---
+
+## Accesos rápidos a módulos
+
+- [01 — Acceso a Datos](01-acceso-datos/README.md)
+- [02 — Computación Descentralizada y Blockchain](02-computacion-descentralizada-blockchain/README.md)
+- [03 — Desarrollo de Interfaces](03-desarrollo-interfaces/README.md)
+- [04 — Programación de Servicios y Procesos](04-programacion-servicios-procesos/README.md)
+- [05 — Programación Multimedia y Dispositivos Móviles](05-programacion-multimedia-moviles/README.md)
+- [06 — Sistemas de Gestión Empresarial](06-sistemas-gestion-empresarial/README.md)
