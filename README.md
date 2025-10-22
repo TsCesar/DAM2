@@ -42,8 +42,6 @@ Incluye material de las siguientes asignaturas:
 - **[Programación Multimedia y Dispositivos Móviles (PMDM)](05-programacion-multimedia-moviles/README.md)** — *curso destacado 25–26*
 - **[Sistemas de Gestión Empresarial (SGE)](06-sistemas-gestion-empresarial/README.md)**
 
-> 💡 Usa este archivo como base: edita nombres, enlaces y ejemplos para tu grupo.
-
 ---
 
 ## Tabla de contenidos
