@@ -1,0 +1,21 @@
+name: Feature request
+description: Propón una mejora o nueva práctica/ejemplo
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      placeholder: ¿Qué quieres añadir o mejorar?
+    validations:
+      required: true
+  - type: input
+    id: modulo
+    attributes:
+      label: Módulo
+      placeholder: 01-acceso-datos / 02-cdb / 03-di / 04-psp / 05-pmdm / 06-sge
+  - type: textarea
+    id: impacto
+    attributes:
+      label: ¿Por qué?
+      placeholder: Beneficios para el curso/evaluación

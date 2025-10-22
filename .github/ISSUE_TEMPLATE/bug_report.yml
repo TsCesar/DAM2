@@ -1,0 +1,27 @@
+name: Bug report
+description: Reporta un error
+labels: [bug]
+body:
+  - type: textarea
+    id: desc
+    attributes:
+      label: Descripción
+      description: ¿Qué pasó y qué esperabas que pasara?
+      placeholder: Describe el bug...
+    validations:
+      required: true
+  - type: input
+    id: modulo
+    attributes:
+      label: Módulo
+      placeholder: 01-acceso-datos / 02-cdb / 03-di / 04-psp / 05-pmdm / 06-sge
+  - type: textarea
+    id: repro
+    attributes:
+      label: Pasos para reproducir
+      placeholder: 1. ...\n2. ...\n3. ...
+  - type: textarea
+    id: extra
+    attributes:
+      label: Extra
+      placeholder: logs, capturas, entorno, etc.
