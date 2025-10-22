@@ -19,7 +19,7 @@ body:
     id: repro
     attributes:
       label: Pasos para reproducir
-      placeholder: 1. ...\n2. ...\n3. ...
+      placeholder: "1. ...\n2. ...\n3. ..."
   - type: textarea
     id: extra
     attributes:
