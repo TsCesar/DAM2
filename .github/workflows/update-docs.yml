@@ -15,6 +15,10 @@ on:
       # Evita bucle: los commits que solo toquen estos archivos NO re-disparan
       - '!README.md'
       - '!docs/INDICE.md'
+  # Programa ejecución diaria a las 04:10 UTC
+  schedule:
+    - cron: '10 4 * * *'
+  # Permite ejecutarlo a mano desde la pestaña Actions
   workflow_dispatch:
 
 permissions:
