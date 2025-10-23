@@ -106,40 +106,45 @@ jobs:
             core.exportVariable('FILE', archivo);
             core.exportVariable('CONTENT_FILE', 'contenido_tmp.txt');
 
-      - name: Crea estructura y archivos de la práctica
+      # === SUSTITUCIÓN: paso mínimo (autor + código) ===
+      - name: Crea estructura y archivos (README mínimo: autor + código)
         shell: bash
         run: |
           set -e
-          mkdir -p "$MOD/practicas/$PRAC"
+          root="$MOD/practicas/$PRAC"
+          mkdir -p "$root"
 
-          # README de la práctica (aquí NO hay YAML, es un heredoc plano)
-          cat > "$MOD/practicas/$PRAC/README.md" <<'EOT'
-          # ${PRAC}
-
-          **Autor/a:** ${AUTOR}
-
-          ## Objetivo
-          Describe el objetivo de la práctica.
-
-          ## Requisitos
-          - …
-
-          ## Pasos
-          1. …
-          2. …
-
-          ## Cómo ejecutar
-          ```bash
-          # comandos
-          ```
-          EOT
-
-          # Archivo principal (o placeholder)
+          # Archivo principal
           if [ -s "$CONTENT_FILE" ]; then
-            cp "$CONTENT_FILE" "$MOD/practicas/$PRAC/$FILE"
+            cp "$CONTENT_FILE" "$root/$FILE"
           else
-            echo "// Pega aquí tu código para $FILE" > "$MOD/practicas/$PRAC/$FILE"
+            printf "// Pega aquí tu código para %s\n" "$FILE" > "$root/$FILE"
           fi
+
+          # Detecta lenguaje para el bloque del README
+          ext="${FILE##*.}"
+          case "$ext" in
+            java) lang=java ;;
+            kt)   lang=kotlin ;;
+            py)   lang=python ;;
+            js)   lang=javascript ;;
+            ts)   lang=typescript ;;
+            html) lang=html ;;
+            css)  lang=css ;;
+            xml)  lang=xml ;;
+            sql)  lang=sql ;;
+            md)   lang=markdown ;;
+            *)    lang="" ;;
+          esac
+
+          # README mínimo (solo autor + bloque con el código)
+          {
+            echo "**Autor/a:** ${AUTOR:-Desconocido}"
+            echo
+            echo '```'"$lang"
+            cat "$root/$FILE"
+            echo '```'
+          } > "$root/README.md"
 
       - name: Actualiza índice, listas por módulo y tabla del README
         shell: bash
