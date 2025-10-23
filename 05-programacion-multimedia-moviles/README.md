@@ -17,6 +17,13 @@ Apps móviles, multimedia, sensores, ciclo de vida, almacenamiento.
 - Documentación general: [../docs](../docs)
 
 ## Prácticas
+
+<!-- LISTA_PRACTICAS_MODULO_INICIO -->
+
+_(sin prácticas todavía)_
+
+<!-- LISTA_PRACTICAS_MODULO_FIN -->
+
 - Añade aquí la lista de prácticas con enlace a sus carpetas.
 
 ## Ejemplos

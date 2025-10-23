@@ -17,6 +17,13 @@ Persistencia, JDBC/JPA/Hibernate, ORM, SQL, XML/JSON, DAO/Repositorios.
 - Documentación general: [../docs](../docs)
 
 ## Prácticas
+
+<!-- LISTA_PRACTICAS_MODULO_INICIO -->
+
+- [p01-crud-sql](01-acceso-datos//practicas/p01-crud-sql/README.md)
+
+<!-- LISTA_PRACTICAS_MODULO_FIN -->
+
 - Añade aquí la lista de prácticas con enlace a sus carpetas.
 
 ## Ejemplos
