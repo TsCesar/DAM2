@@ -96,19 +96,34 @@ jobs:
             const fs = require('fs');
             fs.writeFileSync('contenido_tmp.txt', contenido || '', { encoding: 'utf8' });
 
-            // Outputs (no envs en YAML)
+            // Outputs
             core.setOutput('issue_number', String(num));
             core.setOutput('autor', autor || '');
             core.setOutput('mod', modulo);
             core.setOutput('prac', practica);
             core.setOutput('file', archivo);
 
-      - name: Crea estructura y README mínimo (autor + código)
+      # ===== NUEVO: bloquea slugs duplicados =====
+      - name: Verifica que el slug no exista ya
         shell: bash
         env:
           MOD:  ${{ steps.datos.outputs.mod }}
           PRAC: ${{ steps.datos.outputs.prac }}
-          FILE: ${{ steps.datos.outputs.file }}
+        run: |
+          set -e
+          root="$MOD/practicas/$PRAC"
+          if [ -d "$root" ]; then
+            echo "EXISTS=1" >> "$GITHUB_ENV"
+            echo "::error title=Slug duplicado::${root} ya existe. Elige otro slug para la práctica."
+            exit 1
+          fi
+
+      - name: Crea estructura y README mínimo (autor + código)
+        shell: bash
+        env:
+          MOD:   ${{ steps.datos.outputs.mod }}
+          PRAC:  ${{ steps.datos.outputs.prac }}
+          FILE:  ${{ steps.datos.outputs.file }}
           AUTOR: ${{ steps.datos.outputs.autor }}
         run: |
           set -e
@@ -153,6 +168,19 @@ jobs:
           git add README.md docs/INDICE.md 0*/README.md "$MOD/practicas/$PRAC" || true
           git commit -m "feat(${MOD}): añade práctica ${PRAC} + docs auto [skip ci]" || echo "Nada que commitear"
           git push
+
+      # ===== NUEVO: comenta si hubo slug duplicado =====
+      - name: Notifica duplicado en el issue (si aplica)
+        if: ${{ always() && env.EXISTS == '1' && github.event_name != 'workflow_dispatch' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const num  = parseInt('${{ steps.datos.outputs.issue_number }}', 10);
+            const prac = '${{ steps.datos.outputs.prac }}';
+            const mod  = '${{ steps.datos.outputs.mod }}';
+            const msg  = `⚠️ El slug \`${prac}\` ya existe en \`${mod}/practicas/${prac}\`. Por favor elige otro.`;
+            await github.rest.issues.createComment({ owner, repo, issue_number: num, body: msg });
 
       - name: Comenta y cierra el issue (si no es manual)
         if: ${{ github.event_name != 'workflow_dispatch' }}
