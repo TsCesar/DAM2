@@ -117,3 +117,8 @@ Incluye material de las siguientes asignaturas:
   <a href="05-programacion-multimedia-moviles/README.md"><img src="https://img.shields.io/badge/05%20%E2%80%94%20PMDM-E91E63?style=for-the-badge" alt="PMDM"></a>
   <a href="06-sistemas-gestion-empresarial/README.md"><img src="https://img.shields.io/badge/06%20%E2%80%94%20SGE-009688?style=for-the-badge" alt="SGE"></a>
 </p>
+
+---
+
+### Ì≥ë √çndice de pr√°cticas
+Consulta todas las pr√°cticas por m√≥dulo en **[docs/INDICE.md](docs/INDICE.md)**.
