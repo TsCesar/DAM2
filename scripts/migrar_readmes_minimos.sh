@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Preferencias de extensiones para escoger archivo principal
 PREF_EXT=(java kt py ts js html css xml sql md)
 
 detect_lang() {
@@ -23,33 +22,26 @@ detect_lang() {
 
 pick_main_file() {
   local dir="$1"
-  # 1) si solo hay un archivo no-README, úsalo
   mapfile -t files < <(find "$dir" -maxdepth 1 -type f ! -iname 'readme.md' | sort)
   if [[ ${#files[@]} -eq 1 ]]; then
-    echo "${files[0]}"
-    return 0
+    echo "${files[0]}"; return 0
   fi
-  # 2) por preferencia de extensiones
   for ext in "${PREF_EXT[@]}"; do
     cand=$(find "$dir" -maxdepth 1 -type f -iname "*.${ext}" ! -iname 'readme.md' | head -n1 || true)
-    if [[ -n "${cand:-}" ]]; then
-      echo "$cand"
-      return 0
-    fi
+    if [[ -n "${cand:-}" ]]; then echo "$cand"; return 0; fi
   done
-  # 3) cualquiera
-  if [[ ${#files[@]} -gt 0 ]]; then
-    echo "${files[0]}"
-    return 0
-  fi
-  # 4) nada
-  echo ""
-  return 1
+  if [[ ${#files[@]} -gt 0 ]]; then echo "${files[0]}"; return 0; fi
+  echo ""; return 1
+}
+
+sanitize_author() {
+  # Elimina dobles asteriscos en cualquier parte y recorta espacios
+  # También elimina asteriscos de borde por si quedara "* Cesar *"
+  sed -E 's/\*\*//g; s/^[[:space:]\*]+//; s/[[:space:]\*]+$//'
 }
 
 shopt -s nullglob
 
-# Recorre todos los directorios de prácticas: 0*-*/practicas/*/
 for dir in 0*-*/practicas/*/ ; do
   [[ -d "$dir" ]] || continue
 
@@ -59,17 +51,18 @@ for dir in 0*-*/practicas/*/ ; do
     continue
   fi
 
-  # Intenta recuperar autor del README antiguo si lo tuviera
   old_readme="$dir/README.md"
   autor="Desconocido"
   if [[ -f "$old_readme" ]]; then
-    extraido=$(grep -iE '^\s*\**\s*autor/a\s*:\s*' "$old_readme" | head -n1 | sed -E 's/^.*autor\/a\s*:\s*//I' || true)
-    [[ -n "$extraido" ]] && autor="$extraido"
+    # Extrae tras "Autor/a:" (con posibles negritas), limpia ** y espacios
+    extraido=$(grep -iE '^\s*\**\s*autor/a\s*:\s*' "$old_readme" | head -n1 \
+      | sed -E 's/^.*[Aa]utor\/a\s*:\s*//; s/\r$//' \
+      | sanitize_author || true)
+    [[ -n "${extraido:-}" ]] && autor="$extraido"
   fi
 
   lang="$(detect_lang "$main_file")"
 
-  # Escribe el README mínimo (autor + bloque con el código)
   {
     echo "**Autor/a:** ${autor}"
     echo
