@@ -1,18 +1,7 @@
-# ${PRAC}
+**Autor/a:** cesar
 
-**Autor/a:** ${AUTOR}
-
-## Objetivo
-Describe el objetivo de la práctica.
-
-## Requisitos
-- …
-
-## Pasos
-1. …
-2. …
-
-## Cómo ejecutar
+```java
 ```bash
-# comandos
+
+```
 ```
