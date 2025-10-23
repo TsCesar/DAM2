@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: ➕ Nueva práctica (formulario)
+    url: https://github.com/TsCesar/DAM2/issues/new?template=nueva_practica.yml&labels=nueva-practica&title=%5BGEN%5D%20Nueva%20pr%C3%A1ctica%3A%20pXX-nombre
+    about: Crea una práctica automáticamente desde un formulario
