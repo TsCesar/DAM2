@@ -16,10 +16,6 @@ permissions:
 
 jobs:
   crear:
-    # Ejecuta si:
-    # - Evento de issues y viene del formulario (sin etiqueta), o
-    # - Evento de issues y se añadió la etiqueta 'nueva-practica', o
-    # - Ejecución manual (workflow_dispatch)
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'issues' && (
@@ -34,48 +30,42 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Carga datos del issue (auto o manual)
-        id: carga
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const isManual = context.eventName === 'workflow_dispatch';
-            let issue;
-            if (isManual) {
-              const num = parseInt(core.getInput('issue_number'));
-              const {data} = await github.rest.issues.get({
-                owner: context.repo.owner, repo: context.repo.repo, issue_number: num
-              });
-              issue = data;
-            } else {
-              issue = context.payload.issue;
-            }
-            core.setOutput('number', issue.number.toString());
-            core.setOutput('body', issue.body || '');
-
-      - name: Extrae campos del formulario
+      - name: Lee el issue (auto o manual) y exporta variables seguras
         id: datos
         uses: actions/github-script@v7
         with:
           script: |
-            const body = `${{ steps.carga.outputs.body }}`;
+            const {owner, repo} = context.repo;
+            let issue, num;
+
+            if (context.eventName === 'workflow_dispatch') {
+              num = parseInt(core.getInput('issue_number', {required:true}));
+              issue = (await github.rest.issues.get({owner, repo, issue_number: num})).data;
+            } else {
+              issue = context.payload.issue;
+              num = issue.number;
+            }
+
+            const body = issue.body || '';
+            function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
             function campo(h){
-              const re = new RegExp(`(?<=^|\\n)\\s*###\\s*${h}[\\r\\n]+([\\s\\S]*?)(?=\\n###\\s|$)`,'i');
+              const re = new RegExp(`(?:^|\\n)\\s*###\\s*${escRe(h)}\\s*\\n([\\s\\S]*?)(?=\\n###\\s|$)`,'i');
               const m = body.match(re);
               return m ? m[1].trim() : '';
             }
-            const autor = campo('Autor/a');
-            const modulo = campo('Módulo').toLowerCase();
-            let practica = campo('Nombre de la práctica \\(slug\\)') || campo('Nombre de la práctica');
-            let archivo  = campo('Archivo principal \\(con extensión\\)') || 'main.txt';
-            const contenido = campo('Contenido inicial del archivo principal');
 
-            function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,''); }
+            const autor    = campo('Autor/a');
+            const modulo   = (campo('Módulo') || '').toLowerCase();
+            let practica   = campo('Nombre de la práctica (slug)') || campo('Nombre de la práctica');
+            let archivo    = campo('Archivo principal (con extensión)') || 'main.txt';
+            const contenido= campo('Contenido inicial del archivo principal');
+
+            function slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,''); }
             practica = slugify(practica);
-            archivo  = archivo.replace(/^[\\/]+/,'').replace(/\\s+/g,'-');
-            if(!/\\./.test(archivo)) archivo += '.txt';
+            archivo  = (archivo||'main.txt').replace(/^[\\/]+/,'').replace(/\s+/g,'-');
+            if(!/\./.test(archivo)) archivo += '.txt';
 
-            const mods = [
+            const valid = [
               '01-acceso-datos',
               '02-computacion-descentralizada-blockchain',
               '03-desarrollo-interfaces',
@@ -83,44 +73,51 @@ jobs:
               '05-programacion-multimedia-moviles',
               '06-sistemas-gestion-empresarial'
             ];
-            if(!mods.includes(modulo)) { core.setFailed('Módulo no válido: '+modulo); return; }
+            if (!valid.includes(modulo)) {
+              core.setFailed(`Módulo no válido: ${modulo}`);
+              return;
+            }
 
-            core.setOutput('autor', autor);
-            core.setOutput('modulo', modulo);
-            core.setOutput('practica', practica);
-            core.setOutput('archivo', archivo);
-            core.setOutput('contenido', contenido);
+            const fs = require('fs');
+            fs.writeFileSync('contenido_tmp.txt', contenido || '', {encoding:'utf8'});
 
-      - name: Crea estructura y archivos
+            // Variables de entorno para los siguientes pasos (con fallback)
+            core.exportVariable('ISSUE_NUMBER', String(num));
+            core.exportVariable('AUTOR', autor || 'Anónimo');
+            core.exportVariable('MOD', modulo);
+            core.exportVariable('PRAC', practica);
+            core.exportVariable('FILE', archivo);
+            core.exportVariable('CONTENT_FILE', 'contenido_tmp.txt');
+
+      - name: Crea estructura y archivos de la práctica (sin heredoc)
+        shell: bash
         run: |
           set -e
-          MOD='${{ steps.datos.outputs.modulo }}'
-          PRAC='${{ steps.datos.outputs.practica }}'
-          FILE='${{ steps.datos.outputs.archivo }}'
           mkdir -p "$MOD/practicas/$PRAC"
-          cat > "$MOD/practicas/$PRAC/README.md" <<EOT
-# $PRAC
 
-**Autor/a:** ${{ steps.datos.outputs.autor }}
+          {
+            printf '# %s\n\n' "${PRAC}"
+            printf '**Autor/a:** %s\n\n' "${AUTOR:-Anónimo}"
+            printf '## Objetivo\n'
+            printf 'Describe el objetivo de la práctica.\n\n'
+            printf '## Requisitos\n'
+            printf '- …\n\n'
+            printf '## Pasos\n'
+            printf '1. …\n2. …\n\n'
+            printf '## Cómo ejecutar\n'
+            printf '```bash\n'
+            printf '# comandos\n'
+            printf '```\n'
+          } > "$MOD/practicas/$PRAC/README.md"
 
-## Objetivo
-Describe el objetivo de la práctica.
-
-## Requisitos
-- …
-
-## Cómo ejecutar
-\`\`\`bash
-# comandos
-\`\`\`
-EOT
-          if [ -n "${{ steps.datos.outputs.contenido }}" ]; then
-            printf "%b" "${{ steps.datos.outputs.contenido }}" > "$MOD/practicas/$PRAC/$FILE"
+          if [ -s "$CONTENT_FILE" ]; then
+            cp "$CONTENT_FILE" "$MOD/practicas/$PRAC/$FILE"
           else
             echo "// Pega aquí tu código para $FILE" > "$MOD/practicas/$PRAC/$FILE"
           fi
 
-      - name: Actualiza índice/listas/tabla
+      - name: Actualiza índice, listas por módulo y tabla del README
+        shell: bash
         run: |
           chmod +x scripts/*.sh || true
           scripts/actualiza_indice.sh || true
@@ -128,22 +125,24 @@ EOT
           scripts/actualiza_tabla_practicas.sh || true
 
       - name: Commit y push
+        shell: bash
         run: |
-          git config user.name "github-actions[bot]"
+          git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md docs/INDICE.md 0*/README.md "${{ steps.datos.outputs.modulo }}/practicas/${{ steps.datos.outputs.practica }}" || true
-          git commit -m "feat(${{ steps.datos.outputs.modulo }}): añade práctica ${{ steps.datos.outputs.practica }} + docs auto [skip ci]" || echo "Nada que commitear"
+          git add README.md docs/INDICE.md 0*/README.md "$MOD/practicas/$PRAC" || true
+          git commit -m "feat(${MOD}): añade práctica ${PRAC} + docs auto [skip ci]" || echo "Nada que commitear"
           git push
 
-      - name: Comenta enlace y cierra issue
-        if: ${{ always() && github.event_name != 'workflow_dispatch' }}
+      - name: Comenta con enlace y cierra el issue (si no es manual)
+        if: ${{ github.event_name != 'workflow_dispatch' }}
         uses: actions/github-script@v7
         with:
           script: |
-            const num  = parseInt('${{ steps.carga.outputs.number }}');
-            const mod  = '${{ steps.datos.outputs.modulo }}';
-            const prac = '${{ steps.datos.outputs.practica }}';
+            const {owner, repo} = context.repo;
+            const num  = parseInt(process.env.ISSUE_NUMBER);
+            const mod  = process.env.MOD;
+            const prac = process.env.PRAC;
             const url  = `${context.payload.repository.html_url}/${mod}/practicas/${prac}/README.md`.replace(/\/\/+/g,'/');
-            const msg  = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
-            await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: num, body: msg });
-            await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: num, state: 'closed' });
+            const msg  = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas por módulo y \`docs/INDICE.md\`.`;
+            await github.rest.issues.createComment({ owner, repo, issue_number: num, body: msg });
+            await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed' });
