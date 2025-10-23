@@ -168,3 +168,16 @@ Consulta todas las prácticas por módulo en **[docs/INDICE.md](docs/INDICE.md)*
 </table>
 <!-- TABLA_PRACTICAS_FIN -->
 
+
+---
+
+## ��� Accesos rápidos (nueva pestaña)
+
+<ul>
+  <li><a href="01-acceso-datos/README.md" target="_blank" rel="noopener noreferrer">01 — Acceso a Datos (AD)</a></li>
+  <li><a href="02-computacion-descentralizada-blockchain/README.md" target="_blank" rel="noopener noreferrer">02 — Computación Descentralizada y Blockchain (CDB)</a></li>
+  <li><a href="03-desarrollo-interfaces/README.md" target="_blank" rel="noopener noreferrer">03 — Desarrollo de Interfaces (DI)</a></li>
+  <li><a href="04-programacion-servicios-procesos/README.md" target="_blank" rel="noopener noreferrer">04 — Programación de Servicios y Procesos (PSP)</a></li>
+  <li><a href="05-programacion-multimedia-moviles/README.md" target="_blank" rel="noopener noreferrer">05 — Programación Multimedia y Dispositivos Móviles (PMDM)</a></li>
+  <li><a href="06-sistemas-gestion-empresarial/README.md" target="_blank" rel="noopener noreferrer">06 — Sistemas de Gestión Empresarial (SGE)</a></li>
+</ul>
