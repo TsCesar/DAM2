@@ -93,6 +93,7 @@ Incluye material de las siguientes asignaturas:
 â””â”€ README.md
 
 <h3>?? Prácticas por módulo (auto)</h3>
+<h3>?? Prácticas por módulo (auto)</h3>
 <!-- TABLA_PRACTICAS_INICIO -->
 <table>
   <thead>
@@ -105,10 +106,8 @@ Incluye material de las siguientes asignaturas:
   <tbody>
     <tr>
       <td><a href="01-acceso-datos/README.md" target="_blank" rel="noopener noreferrer">Acceso a Datos (AD)</a></td>
-      <td style="text-align:center;">3</td>
+      <td style="text-align:center;">1</td>
       <td>- <a href="01-acceso-datos/practicas/examen-dia-22-10-2025/README.md" target="_blank" rel="noopener noreferrer">examen-dia-22-10-2025</a><br/>
-- <a href="01-acceso-datos/practicas/p01-crud-sql/README.md" target="_blank" rel="noopener noreferrer">p01-crud-sql</a><br/>
-- <a href="01-acceso-datos/practicas/prueba2/README.md" target="_blank" rel="noopener noreferrer">prueba2</a><br/>
 </td>
     </tr>
     <tr>
