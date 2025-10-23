@@ -25,6 +25,7 @@ Persistencia, JDBC/JPA/Hibernate, ORM, SQL, XML/JSON, DAO/Repositorios.
 
 - [examen-dia-22-10-2025](./practicas/examen-dia-22-10-2025/README.md)
 - [p01-crud-sql](./practicas/p01-crud-sql/README.md)
+- [prueba2](./practicas/prueba2/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
 
