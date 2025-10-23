@@ -125,6 +125,7 @@ Consulta todas las pr√°cticas por m√≥dulo en **[docs/INDICE.md](docs/INDICE.md)*
 
 <h3>Ì≥ä Pr√°cticas por m√≥dulo (auto)</h3>
 <h3>Ì≥ä Pr√°cticas por m√≥dulo (auto)</h3>
+<h3>Ì≥ä Pr√°cticas por m√≥dulo (auto)</h3>
 <!-- TABLA_PRACTICAS_INICIO -->
 <table>
   <thead>
@@ -147,8 +148,8 @@ Consulta todas las pr√°cticas por m√≥dulo en **[docs/INDICE.md](docs/INDICE.md)*
     </tr>
     <tr>
       <td><a href="03-desarrollo-interfaces//README.md" target="_blank" rel="noopener noreferrer">Desarrollo de Interfaces (DI)</a></td>
-      <td style="text-align:center;">0</td>
-      <td>(sin pr√°cticas todav√≠a)</td>
+      <td style="text-align:center;">1</td>
+      <td>- <a href="03-desarrollo-interfaces//practicas/p01-layouts/README.md" target="_blank" rel="noopener noreferrer">p01-layouts</a><br/></td>
     </tr>
     <tr>
       <td><a href="04-programacion-servicios-procesos//README.md" target="_blank" rel="noopener noreferrer">Programaci√≥n de Servicios y Procesos (PSP)</a></td>
@@ -168,6 +169,7 @@ Consulta todas las pr√°cticas por m√≥dulo en **[docs/INDICE.md](docs/INDICE.md)*
   </tbody>
 </table>
 <!-- TABLA_PRACTICAS_FIN -->
+
 
 
 
