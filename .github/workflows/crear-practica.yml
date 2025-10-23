@@ -1,0 +1,108 @@
+name: Crear práctica desde Issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  crear:
+    if: contains(github.event.issue.labels.*.name, 'nueva-practica')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extrae datos del issue
+        id: datos
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || '';
+            function campo(h){
+              const re = new RegExp(`(?<=^|\\n)\\s*###\\s*${h}[\\r\\n]+([\\s\\S]*?)(?=\\n###\\s|$)`,'i');
+              const m = body.match(re);
+              return m ? m[1].trim() : '';
+            }
+            const autor = campo('Autor/a');
+            const modulo = campo('Módulo').toLowerCase();
+            let practica = campo('Nombre de la práctica \\(slug\\)') || campo('Nombre de la práctica');
+            let archivo = campo('Archivo principal \\(con extensión\\)') || 'main.txt';
+            const contenido = campo('Contenido inicial del archivo principal');
+
+            function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,''); }
+            practica = slugify(practica);
+            archivo  = archivo.replace(/^[\\/]+/,'').replace(/\\s+/g,'-');
+            if(!/\\./.test(archivo)) archivo += '.txt'; // añade .txt si falta extensión
+
+            const modValid = [
+              '01-acceso-datos',
+              '02-computacion-descentralizada-blockchain',
+              '03-desarrollo-interfaces',
+              '04-programacion-servicios-procesos',
+              '05-programacion-multimedia-moviles',
+              '06-sistemas-gestion-empresarial'
+            ];
+            if(!modValid.includes(modulo)){ core.setFailed('Módulo no válido: '+modulo); return; }
+
+            core.setOutput('autor', autor);
+            core.setOutput('modulo', modulo);
+            core.setOutput('practica', practica);
+            core.setOutput('archivo', archivo);
+            core.setOutput('contenido', contenido);
+
+      - name: Crea estructura y archivos
+        run: |
+          MOD='${{ steps.datos.outputs.modulo }}'
+          PRAC='${{ steps.datos.outputs.practica }}'
+          FILE='${{ steps.datos.outputs.archivo }}'
+          mkdir -p "$MOD/practicas/$PRAC"
+          cat > "$MOD/practicas/$PRAC/README.md" <<EOT
+# $PRAC
+
+**Autor/a:** ${{ steps.datos.outputs.autor }}
+
+## Objetivo
+Describe el objetivo de la práctica.
+
+## Requisitos
+- …
+
+## Cómo ejecutar
+\`\`\`bash
+# comandos
+\`\`\`
+EOT
+          if [ -n "${{ steps.datos.outputs.contenido }}" ]; then
+            printf "%b" "${{ steps.datos.outputs.contenido }}" > "$MOD/practicas/$PRAC/$FILE"
+          else
+            echo "# Pega aquí tu código para $FILE" > "$MOD/practicas/$PRAC/$FILE"
+          fi
+
+      - name: Actualiza índice/listas/tabla
+        run: |
+          chmod +x scripts/*.sh || true
+          scripts/actualiza_indice.sh || true
+          scripts/actualiza_listas_modulos.sh || true
+          scripts/actualiza_tabla_practicas.sh || true
+
+      - name: Commit y push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${{ steps.datos.outputs.modulo }}/practicas/${{ steps.datos.outputs.practica }}" README.md docs/INDICE.md 0*/README.md || true
+          git commit -m "feat(${{ steps.datos.outputs.modulo }}): añade práctica ${{ steps.datos.outputs.practica }} + docs auto [skip ci]" || echo "Nada que commitear"
+          git push
+
+      - name: Comenta con el enlace y cierra el issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const mod = '${{ steps.datos.outputs.modulo }}';
+            const prac= '${{ steps.datos.outputs.practica }}';
+            const url = `${context.payload.repository.html_url}/${mod}/practicas/${prac}/README.md`.replace(/\/\/+/g,'/');
+            const body = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
+            await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number, body });
+            await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number, state: 'closed' });
