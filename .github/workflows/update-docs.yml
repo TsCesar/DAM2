@@ -1,0 +1,63 @@
+name: Actualiza índice y tabla de prácticas
+
+on:
+  push:
+    branches: [ "main" ]
+    # Dispara cuando cambian contenidos de módulos o los scripts
+    paths:
+      - '01-*/**'
+      - '02-*/**'
+      - '03-*/**'
+      - '04-*/**'
+      - '05-*/**'
+      - '06-*/**'
+      - 'scripts/**'
+      # Evita bucle: los commits que solo toquen estos archivos NO re-disparan
+      - '!README.md'
+      - '!docs/INDICE.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configura identidad de commit del bot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Asegura permisos de ejecución de scripts
+        run: |
+          chmod +x scripts/*.sh || true
+
+      - name: Genera índice y tabla
+        run: |
+          if [ -x scripts/actualiza_indice.sh ]; then
+            scripts/actualiza_indice.sh
+          else
+            echo "scripts/actualiza_indice.sh no existe o no es ejecutable"; exit 1
+          fi
+
+          if [ -x scripts/actualiza_tabla_practicas.sh ]; then
+            scripts/actualiza_tabla_practicas.sh
+          else
+            echo "scripts/actualiza_tabla_practicas.sh no existe o no es ejecutable"; exit 1
+          fi
+
+      - name: Commit y push si hay cambios
+        run: |
+          if ! git diff --quiet; then
+            git add README.md docs/INDICE.md
+            git commit -m "docs: auto-actualiza índice y tabla de prácticas [skip ci]"
+            git push
+          else
+            echo "Sin cambios que subir."
+          fi
