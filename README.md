@@ -18,6 +18,14 @@ Sustituye los <placeholders> por tus datos reales cuando quieras.
   <img alt="License" src="https://img.shields.io/badge/Licencia-MIT-4caf50?style=for-the-badge"/>
 </p>
 
+<p align="center">
+  <a href="01-acceso-datos/README.md"><img src="https://img.shields.io/badge/01%20%E2%80%94%20Acceso%20a%20Datos-303f9f?style=for-the-badge" alt="Acceso a Datos"></a>
+  <a href="02-computacion-descentralizada-blockchain/README.md"><img src="https://img.shields.io/badge/02%20%E2%80%94%20CDB-00695c?style=for-the-badge" alt="Computación Descentralizada y Blockchain"></a>
+  <a href="03-desarrollo-interfaces/README.md"><img src="https://img.shields.io/badge/03%20%E2%80%94%20Desarrollo%20de%20Interfaces-512da8?style=for-the-badge" alt="Desarrollo de Interfaces"></a>
+  <a href="04-programacion-servicios-procesos/README.md"><img src="https://img.shields.io/badge/04%20%E2%80%94%20PSP-455a64?style=for-the-badge" alt="PSP"></a>
+  <a href="05-programacion-multimedia-moviles/README.md"><img src="https://img.shields.io/badge/05%20%E2%80%94%20PMDM-E91E63?style=for-the-badge" alt="PMDM"></a>
+  <a href="06-sistemas-gestion-empresarial/README.md"><img src="https://img.shields.io/badge/06%20%E2%80%94%20SGE-009688?style=for-the-badge" alt="SGE"></a>
+</p>
 
 
 ---
@@ -88,3 +96,36 @@ Incluye material de las siguientes asignaturas:
 │  ├─ ISSUE_TEMPLATE/
 │  └─ PULL_REQUEST_TEMPLATE.md
 └─ README.md
+
+
+---
+
+## Accesos rápidos a módulos
+
+- [01 — Acceso a Datos](01-acceso-datos/README.md)
+- [02 — Computación Descentralizada y Blockchain](02-computacion-descentralizada-blockchain/README.md)
+- [03 — Desarrollo de Interfaces](03-desarrollo-interfaces/README.md)
+- [04 — Programación de Servicios y Procesos](04-programacion-servicios-procesos/README.md)
+- [05 — Programación Multimedia y Dispositivos Móviles](05-programacion-multimedia-moviles/README.md)
+- [06 — Sistemas de Gestión Empresarial](06-sistemas-gestion-empresarial/README.md)
+
+<p align="center">
+  <a href="01-acceso-datos/README.md"><img src="https://img.shields.io/badge/01%20%E2%80%94%20Acceso%20a%20Datos-303f9f?style=for-the-badge" alt="Acceso a Datos"></a>
+  <a href="02-computacion-descentralizada-blockchain/README.md"><img src="https://img.shields.io/badge/02%20%E2%80%94%20CDB-00695c?style=for-the-badge" alt="Computación Descentralizada y Blockchain"></a>
+  <a href="03-desarrollo-interfaces/README.md"><img src="https://img.shields.io/badge/03%20%E2%80%94%20Desarrollo%20de%20Interfaces-512da8?style=for-the-badge" alt="Desarrollo de Interfaces"></a>
+  <a href="04-programacion-servicios-procesos/README.md"><img src="https://img.shields.io/badge/04%20%E2%80%94%20PSP-455a64?style=for-the-badge" alt="PSP"></a>
+  <a href="05-programacion-multimedia-moviles/README.md"><img src="https://img.shields.io/badge/05%20%E2%80%94%20PMDM-E91E63?style=for-the-badge" alt="PMDM"></a>
+  <a href="06-sistemas-gestion-empresarial/README.md"><img src="https://img.shields.io/badge/06%20%E2%80%94%20SGE-009688?style=for-the-badge" alt="SGE"></a>
+</p>
+
+
+## ��� Accesos rápidos (nueva pestaña)
+
+<ul>
+  <li><a href="01-acceso-datos/README.md" target="_blank" rel="noopener noreferrer">01 — Acceso a Datos (AD)</a></li>
+  <li><a href="02-computacion-descentralizada-blockchain/README.md" target="_blank" rel="noopener noreferrer">02 — Computación Descentralizada y Blockchain (CDB)</a></li>
+  <li><a href="03-desarrollo-interfaces/README.md" target="_blank" rel="noopener noreferrer">03 — Desarrollo de Interfaces (DI)</a></li>
+  <li><a href="04-programacion-servicios-procesos/README.md" target="_blank" rel="noopener noreferrer">04 — Programación de Servicios y Procesos (PSP)</a></li>
+  <li><a href="05-programacion-multimedia-moviles/README.md" target="_blank" rel="noopener noreferrer">05 — Programación Multimedia y Dispositivos Móviles (PMDM)</a></li>
+  <li><a href="06-sistemas-gestion-empresarial/README.md" target="_blank" rel="noopener noreferrer">06 — Sistemas de Gestión Empresarial (SGE)</a></li>
+</ul>
