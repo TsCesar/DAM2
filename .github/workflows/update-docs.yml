@@ -3,22 +3,8 @@ name: Actualiza índice y tabla de prácticas
 on:
   push:
     branches: [ "main" ]
-    # Dispara cuando cambian contenidos de módulos o los scripts
-    paths:
-      - '01-*/**'
-      - '02-*/**'
-      - '03-*/**'
-      - '04-*/**'
-      - '05-*/**'
-      - '06-*/**'
-      - 'scripts/**'
-      # Evita bucle: los commits que solo toquen estos archivos NO re-disparan
-      - '!README.md'
-      - '!docs/INDICE.md'
-  # Programa ejecución diaria a las 04:10 UTC (~05:10/06:10 España)
   schedule:
-    - cron: '10 4 * * *'
-  # Permite ejecutarlo a mano desde Actions
+    - cron: '10 4 * * *'   # diario 04:10 UTC
   workflow_dispatch:
 
 permissions:
@@ -26,6 +12,8 @@ permissions:
 
 jobs:
   build:
+    # Evita bucle si el propio bot dispara un push; permite schedule y manual
+    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,29 +26,21 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Asegura permisos de ejecución de scripts
+      - name: Asegura permisos de ejecución
         run: |
           chmod +x scripts/*.sh || true
 
-      - name: Genera índice y tabla
+      - name: Genera índice y listados + tabla
         run: |
-          if [ -x scripts/actualiza_indice.sh ]; then
-            scripts/actualiza_indice.sh
-          else
-            echo "scripts/actualiza_indice.sh no existe o no es ejecutable"; exit 1
-          fi
-
-          if [ -x scripts/actualiza_tabla_practicas.sh ]; then
-            scripts/actualiza_tabla_practicas.sh
-          else
-            echo "scripts/actualiza_tabla_practicas.sh no existe o no es ejecutable"; exit 1
-          fi
+          scripts/actualiza_indice.sh
+          scripts/actualiza_listas_modulos.sh
+          scripts/actualiza_tabla_practicas.sh
 
       - name: Commit y push si hay cambios
         run: |
           if ! git diff --quiet; then
-            git add README.md docs/INDICE.md
-            git commit -m "docs: auto-actualiza índice y tabla de prácticas [skip ci]"
+            git add README.md docs/INDICE.md 0*/README.md
+            git commit -m "docs: auto-actualiza índice, listas y tabla [skip ci]"
             git push
           else
             echo "Sin cambios que subir."
