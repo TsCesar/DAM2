@@ -93,12 +93,13 @@ Incluye material de las siguientes asignaturas:
 â””â”€ README.md
 
 <h3>?? Prácticas por módulo (auto)</h3>
+<h3>?? Pr�cticas por m�dulo (auto)</h3>
 <!-- TABLA_PRACTICAS_INICIO -->
 <table>
   <thead>
     <tr>
-      <th style="text-align:left;">Módulo</th>
-      <th style="text-align:center;">N.º prácticas</th>
+      <th style="text-align:left;">M�dulo</th>
+      <th style="text-align:center;">N.� pr�cticas</th>
       <th style="text-align:left;">Listado</th>
     </tr>
   </thead>
@@ -112,9 +113,9 @@ Incluye material de las siguientes asignaturas:
 </td>
     </tr>
     <tr>
-      <td><a href="02-computacion-descentralizada-blockchain/README.md" target="_blank" rel="noopener noreferrer">ComputaciÃ³n Descentralizada y Blockchain (CDB)</a></td>
+      <td><a href="02-computacion-descentralizada-blockchain/README.md" target="_blank" rel="noopener noreferrer">Computación Descentralizada y Blockchain (CDB)</a></td>
       <td style="text-align:center;">0</td>
-      <td>(sin prácticas todavía)</td>
+      <td>(sin pr�cticas todav�a)</td>
     </tr>
     <tr>
       <td><a href="03-desarrollo-interfaces/README.md" target="_blank" rel="noopener noreferrer">Desarrollo de Interfaces (DI)</a></td>
@@ -123,19 +124,19 @@ Incluye material de las siguientes asignaturas:
 </td>
     </tr>
     <tr>
-      <td><a href="04-programacion-servicios-procesos/README.md" target="_blank" rel="noopener noreferrer">ProgramaciÃ³n de Servicios y Procesos (PSP)</a></td>
+      <td><a href="04-programacion-servicios-procesos/README.md" target="_blank" rel="noopener noreferrer">Programación de Servicios y Procesos (PSP)</a></td>
       <td style="text-align:center;">0</td>
-      <td>(sin prácticas todavía)</td>
+      <td>(sin pr�cticas todav�a)</td>
     </tr>
     <tr>
-      <td><a href="05-programacion-multimedia-moviles/README.md" target="_blank" rel="noopener noreferrer">ProgramaciÃ³n Multimedia y Dispositivos MÃ³viles (PMDM) â€” 25â€“26</a></td>
+      <td><a href="05-programacion-multimedia-moviles/README.md" target="_blank" rel="noopener noreferrer">Programación Multimedia y Dispositivos Móviles (PMDM) — 25–26</a></td>
       <td style="text-align:center;">0</td>
-      <td>(sin prácticas todavía)</td>
+      <td>(sin pr�cticas todav�a)</td>
     </tr>
     <tr>
-      <td><a href="06-sistemas-gestion-empresarial/README.md" target="_blank" rel="noopener noreferrer">Sistemas de GestiÃ³n Empresarial (SGE)</a></td>
+      <td><a href="06-sistemas-gestion-empresarial/README.md" target="_blank" rel="noopener noreferrer">Sistemas de Gestión Empresarial (SGE)</a></td>
       <td style="text-align:center;">0</td>
-      <td>(sin prácticas todavía)</td>
+      <td>(sin pr�cticas todav�a)</td>
     </tr>
   </tbody>
 </table>
