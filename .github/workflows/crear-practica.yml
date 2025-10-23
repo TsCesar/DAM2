@@ -16,13 +16,12 @@ permissions:
 
 jobs:
   crear:
-    # Permite ejecución manual o por issue etiquetado/abierto con el formulario
-    if: >-
+    # Permite ejecución manual o por issue con el formulario/etiqueta
+    if: >
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'issues' && (
-        (github.event.action == 'opened' && contains(github.event.issue.body, '### Autor/a')) ||
-        (github.event.action == 'labeled' && github.event.label.name == 'nueva-practica')
-      ))
+      (github.event_name == 'issues' &&
+       ((github.event.action == 'opened' && contains(github.event.issue.body, '### Autor/a')) ||
+        (github.event.action == 'labeled' && github.event.label.name == 'nueva-practica')))
     runs-on: ubuntu-latest
 
     steps:
@@ -56,7 +55,7 @@ jobs:
 
             if (context.eventName === 'workflow_dispatch') {
               issue = await pickIssue();
-              if (!issue) return; // ya se marcó fallo arriba
+              if (!issue) return;
               num = issue.number;
             } else {
               issue = context.payload.issue;
@@ -71,16 +70,16 @@ jobs:
               return m ? m[1].trim() : '';
             }
 
-            const autor    = campo('Autor/a');
-            const modulo   = (campo('Módulo') || '').toLowerCase();
-            let practica   = campo('Nombre de la práctica (slug)') || campo('Nombre de la práctica');
-            let archivo    = campo('Archivo principal (con extensión)') || 'main.txt';
-            const contenido= campo('Contenido inicial del archivo principal');
+            const autor     = campo('Autor/a');
+            const modulo    = (campo('Módulo') || '').toLowerCase();
+            let practica    = campo('Nombre de la práctica (slug)') || campo('Nombre de la práctica');
+            let archivo     = campo('Archivo principal (con extensión)') || 'main.txt';
+            const contenido = campo('Contenido inicial del archivo principal');
 
             function slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,''); }
             practica = slugify(practica || '');
             archivo  = (archivo||'main.txt').replace(/^[\\/]+/,'').replace(/\s+/g,'-');
-            if(!/\./.test(archivo)) archivo += '.txt';
+            if (!/\./.test(archivo)) archivo += '.txt';
 
             const valid = [
               '01-acceso-datos',
@@ -108,11 +107,11 @@ jobs:
       - name: Crea estructura y archivos (README mínimo: autor + código)
         shell: bash
         run: |
-          set -euo pipefail
+          set -e
           root="$MOD/practicas/$PRAC"
           mkdir -p "$root"
 
-          # Archivo principal
+          # Archivo principal (o placeholder si no hay contenido)
           if [ -s "$CONTENT_FILE" ]; then
             cp "$CONTENT_FILE" "$root/$FILE"
           else
@@ -135,10 +134,15 @@ jobs:
             *)    lang="" ;;
           esac
 
-          # README mínimo (solo autor + bloque con el código)
+          # README mínimo: solo autor y el código renderizado
           {
-            printf "**Autor/a:** %s\n\n" "${AUTOR:-Desconocido}"
-            echo '```'"$lang"
+            echo "**Autor/a:** ${AUTOR:-Desconocido}"
+            echo
+            if [ -n "$lang" ]; then
+              echo '```'"$lang"
+            else
+              echo '```'
+            fi
             cat "$root/$FILE"
             echo '```'
           } > "$root/README.md"
@@ -147,9 +151,9 @@ jobs:
         shell: bash
         run: |
           chmod +x scripts/*.sh || true
-          ./scripts/actualiza_indice.sh || true
-          ./scripts/actualiza_listas_modulos.sh || true
-          ./scripts/actualiza_tabla_practicas.sh || true
+          scripts/actualiza_indice.sh || true
+          scripts/actualiza_listas_modulos.sh || true
+          scripts/actualiza_tabla_practicas.sh || true
 
       - name: Commit y push
         shell: bash
@@ -171,6 +175,6 @@ jobs:
             const mod = process.env.MOD;
             const prac = process.env.PRAC;
             const url = `${context.payload.repository.html_url}/blob/${branch}/${mod}/practicas/${prac}/README.md`;
-            const msg = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el README, las listas de cada módulo y docs/INDICE.md.`;
+            const msg = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
             await github.rest.issues.createComment({ owner, repo, issue_number: num, body: msg });
             await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed' });
