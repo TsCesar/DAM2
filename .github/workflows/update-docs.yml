@@ -30,11 +30,14 @@ jobs:
         run: |
           chmod +x scripts/*.sh || true
 
+
       - name: Genera índice y listados + tabla
         run: |
           scripts/actualiza_indice.sh
           scripts/actualiza_listas_modulos.sh
+          scripts/inserta_boton_practica.sh
           scripts/actualiza_tabla_practicas.sh
+
 
       - name: Commit y push si hay cambios
         run: |
