@@ -1,0 +1,47 @@
+name: Nueva práctica
+description: Solicita crear una nueva práctica en un módulo
+labels: [nueva-practica]
+body:
+  - type: input
+    id: autor
+    attributes:
+      label: Autor/a
+      placeholder: Tu nombre
+    validations:
+      required: true
+  - type: dropdown
+    id: modulo
+    attributes:
+      label: Módulo
+      options:
+        - 01-acceso-datos
+        - 02-computacion-descentralizada-blockchain
+        - 03-desarrollo-interfaces
+        - 04-programacion-servicios-procesos
+        - 05-programacion-multimedia-moviles
+        - 06-sistemas-gestion-empresarial
+    validations:
+      required: true
+  - type: input
+    id: practica
+    attributes:
+      label: Nombre de la práctica (slug)
+      description: Formato sugerido pXX-nombre, ej. p02-apis-rest
+      placeholder: p01-mi-practica
+    validations:
+      required: true
+  - type: input
+    id: archivo
+    attributes:
+      label: Archivo principal (con extensión)
+      placeholder: Main.kt / Main.java / index.html / main.py
+    validations:
+      required: true
+  - type: textarea
+    id: contenido
+    attributes:
+      label: Contenido inicial del archivo principal
+      description: Pega aquí el contenido inicial (opcional)
+      render: bash
+    validations:
+      required: false
