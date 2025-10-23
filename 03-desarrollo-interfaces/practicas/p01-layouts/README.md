@@ -1,16 +1,5 @@
-# p01-layouts
+**Autor/a:** Desconocido
 
-## Objetivo
-Describe el objetivo de la práctica.
-
-## Requisitos
-- …
-
-## Pasos
-1. …
-2. …
-
-## Cómo ejecutar
-```bash
-# comandos
+```html
+<!-- Layout base -->
 ```
