@@ -10,9 +10,7 @@ permissions:
 
 jobs:
   crear:
-    # Dispara si:
-    # 1) Se abre un issue cuyo cuerpo tiene los campos del formulario (sin depender de labels), o
-    # 2) Se etiqueta con 'nueva-practica'
+    # Dispara si el issue viene del formulario (sin etiqueta) o si se etiqueta con 'nueva-practica'
     if: >
       (github.event.action == 'opened' &&
        contains(github.event.issue.body, '### Autor/a') &&
@@ -115,4 +113,5 @@ EOT
             const body = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
             await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number, body });
             await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number, state: 'closed' });
+
 
