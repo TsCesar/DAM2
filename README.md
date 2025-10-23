@@ -86,3 +86,52 @@ Incluye material de las siguientes asignaturas:
 â”‚  â”œâ”€ ISSUE_TEMPLATE/
 â”‚  â””â”€ PULL_REQUEST_TEMPLATE.md
 â””â”€ README.md
+
+<h3>?? Prácticas por módulo (auto)</h3>
+<!-- TABLA_PRACTICAS_INICIO -->
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left;">Módulo</th>
+      <th style="text-align:center;">N.º prácticas</th>
+      <th style="text-align:left;">Listado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="01-acceso-datos/README.md" target="_blank" rel="noopener noreferrer">Acceso a Datos (AD)</a></td>
+      <td style="text-align:center;">3</td>
+      <td>- <a href="01-acceso-datos/practicas/examen-dia-22-10-2025/README.md" target="_blank" rel="noopener noreferrer">examen-dia-22-10-2025</a><br/>
+- <a href="01-acceso-datos/practicas/p01-crud-sql/README.md" target="_blank" rel="noopener noreferrer">p01-crud-sql</a><br/>
+- <a href="01-acceso-datos/practicas/prueba2/README.md" target="_blank" rel="noopener noreferrer">prueba2</a><br/>
+</td>
+    </tr>
+    <tr>
+      <td><a href="02-computacion-descentralizada-blockchain/README.md" target="_blank" rel="noopener noreferrer">ComputaciÃ³n Descentralizada y Blockchain (CDB)</a></td>
+      <td style="text-align:center;">0</td>
+      <td>(sin prácticas todavía)</td>
+    </tr>
+    <tr>
+      <td><a href="03-desarrollo-interfaces/README.md" target="_blank" rel="noopener noreferrer">Desarrollo de Interfaces (DI)</a></td>
+      <td style="text-align:center;">1</td>
+      <td>- <a href="03-desarrollo-interfaces/practicas/p01-layouts/README.md" target="_blank" rel="noopener noreferrer">p01-layouts</a><br/>
+</td>
+    </tr>
+    <tr>
+      <td><a href="04-programacion-servicios-procesos/README.md" target="_blank" rel="noopener noreferrer">ProgramaciÃ³n de Servicios y Procesos (PSP)</a></td>
+      <td style="text-align:center;">0</td>
+      <td>(sin prácticas todavía)</td>
+    </tr>
+    <tr>
+      <td><a href="05-programacion-multimedia-moviles/README.md" target="_blank" rel="noopener noreferrer">ProgramaciÃ³n Multimedia y Dispositivos MÃ³viles (PMDM) â€” 25â€“26</a></td>
+      <td style="text-align:center;">0</td>
+      <td>(sin prácticas todavía)</td>
+    </tr>
+    <tr>
+      <td><a href="06-sistemas-gestion-empresarial/README.md" target="_blank" rel="noopener noreferrer">Sistemas de GestiÃ³n Empresarial (SGE)</a></td>
+      <td style="text-align:center;">0</td>
+      <td>(sin prácticas todavía)</td>
+    </tr>
+  </tbody>
+</table>
+<!-- TABLA_PRACTICAS_FIN -->

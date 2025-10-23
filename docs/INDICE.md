@@ -1,7 +1,7 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-10-23 11:04:21_
+_Actualizado: 2025-10-23 11:17:07_
 
 ## Acceso a Datos (AD)
 
