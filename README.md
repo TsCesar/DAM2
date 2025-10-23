@@ -131,6 +131,7 @@ Incluye material de las siguientes asignaturas:
 </ul>
 
 <h3>?? Prácticas por módulo (auto)</h3>
+<h3>?? Prácticas por módulo (auto)</h3>
 <!-- TABLA_PRACTICAS_INICIO -->
 <table>
   <thead>
