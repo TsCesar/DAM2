@@ -1,38 +1,32 @@
-# DAM2
-<!--
-README de ejemplo listo para pegar en tu repositorio.
-Sustituye los <placeholders> por tus datos reales cuando quieras.
--->
-
+cat > README.md <<'MD'
+<!-- Cabecera animada -->
 <p align="center">
-  <!-- Encabezado animado -->
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=3000&pause=900&center=true&vCenter=true&width=1000&lines=2%C2%BA+DAM+%E2%80%94+Repositorio+de+Clase+(25%E2%80%9326);Curso+destacado%3A+Programaci%C3%B3n+Multimedia+y+Dispositivos+M%C3%B3viles;Acceso+a+Datos;Computaci%C3%B3n+Descentralizada+y+Blockchain;Desarrollo+de+Interfaces;Programaci%C3%B3n+de+Servicios+y+Procesos;Sistemas+de+Gesti%C3%B3n+Empresarial" alt="Encabezado animado" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=3000&pause=900&center=true&vCenter=true&width=1000&lines=2Âº+DAM+â€”+Repositorio+de+Clase+(25â€“26);Curso+destacado:+ProgramaciÃ³n+Multimedia+y+Dispositivos+MÃ³viles;Acceso+a+Datos;ComputaciÃ³n+Descentralizada+y+Blockchain;Desarrollo+de+Interfaces;ProgramaciÃ³n+de+Servicios+y+Procesos;Sistemas+de+GestiÃ³n+Empresarial" alt="Encabezado animado" />
 </p>
 
 <h1 align="center">ğŸ“š Repositorio de CÃ³digos â€” 2Âº DAM (25â€“26)</h1>
 
 <p align="center">
-  <img alt="2Âº DAM" src="https://img.shields.io/badge/2%C2%BA%20DAM-25--26-673ab7?style=for-the-badge"/>
+  <img alt="2Âº DAM" src="https://img.shields.io/badge/2Âº%20DAM-25--26-673ab7?style=for-the-badge"/>
   <img alt="Tipo" src="https://img.shields.io/badge/Repositorio-educativo-03a9f4?style=for-the-badge"/>
-  <img alt="Lenguajes" src="https://img.shields.io/badge/Java%20%7C%20Kotlin%20%7C%20SQL%20%7C%20XML-9c27b0?style=for-the-badge"/>
+  <img alt="Lenguajes" src="https://img.shields.io/badge/Java%20|%20Kotlin%20|%20SQL%20|%20XML-9c27b0?style=for-the-badge"/>
   <img alt="License" src="https://img.shields.io/badge/Licencia-MIT-4caf50?style=for-the-badge"/>
 </p>
 
 <p align="center">
-  <a href="01-acceso-datos/README.md"><img src="https://img.shields.io/badge/01%20%E2%80%94%20Acceso%20a%20Datos-303f9f?style=for-the-badge" alt="Acceso a Datos"></a>
-  <a href="02-computacion-descentralizada-blockchain/README.md"><img src="https://img.shields.io/badge/02%20%E2%80%94%20CDB-00695c?style=for-the-badge" alt="ComputaciÃ³n Descentralizada y Blockchain"></a>
-  <a href="03-desarrollo-interfaces/README.md"><img src="https://img.shields.io/badge/03%20%E2%80%94%20Desarrollo%20de%20Interfaces-512da8?style=for-the-badge" alt="Desarrollo de Interfaces"></a>
-  <a href="04-programacion-servicios-procesos/README.md"><img src="https://img.shields.io/badge/04%20%E2%80%94%20PSP-455a64?style=for-the-badge" alt="PSP"></a>
-  <a href="05-programacion-multimedia-moviles/README.md"><img src="https://img.shields.io/badge/05%20%E2%80%94%20PMDM-E91E63?style=for-the-badge" alt="PMDM"></a>
-  <a href="06-sistemas-gestion-empresarial/README.md"><img src="https://img.shields.io/badge/06%20%E2%80%94%20SGE-009688?style=for-the-badge" alt="SGE"></a>
+  <a href="01-acceso-datos/README.md"><img src="https://img.shields.io/badge/01%20â€”%20Acceso%20a%20Datos-303f9f?style=for-the-badge" alt="Acceso a Datos"></a>
+  <a href="02-computacion-descentralizada-blockchain/README.md"><img src="https://img.shields.io/badge/02%20â€”%20CDB-00695c?style=for-the-badge" alt="ComputaciÃ³n Descentralizada y Blockchain"></a>
+  <a href="03-desarrollo-interfaces/README.md"><img src="https://img.shields.io/badge/03%20â€”%20Desarrollo%20de%20Interfaces-512da8?style=for-the-badge" alt="Desarrollo de Interfaces"></a>
+  <a href="04-programacion-servicios-procesos/README.md"><img src="https://img.shields.io/badge/04%20â€”%20PSP-455a64?style=for-the-badge" alt="PSP"></a>
+  <a href="05-programacion-multimedia-moviles/README.md"><img src="https://img.shields.io/badge/05%20â€”%20PMDM-E91E63?style=for-the-badge" alt="PMDM"></a>
+  <a href="06-sistemas-gestion-empresarial/README.md"><img src="https://img.shields.io/badge/06%20â€”%20SGE-009688?style=for-the-badge" alt="SGE"></a>
 </p>
-
 
 ---
 
 ## Resumen
 
-Plantilla de README para un repositorio de **cÃ³digos de clase** de 2Âº **Desarrollo de Aplicaciones Multiplataforma (DAM)**.  
+Repositorio de **cÃ³digos de clase** de 2Âº **Desarrollo de Aplicaciones Multiplataforma (DAM)**.  
 Incluye material de las siguientes asignaturas:
 
 - **[Acceso a Datos (AD)](01-acceso-datos/README.md)**
@@ -47,13 +41,9 @@ Incluye material de las siguientes asignaturas:
 ## Tabla de contenidos
 
 - [Estructura](#estructura)
-- [Asignaturas](#asignaturas)
-- [Empezar rÃ¡pido](#empezar-rÃ¡pido)
-- [Convenciones](#convenciones)
-- [Ejemplos de carpetas por mÃ³dulo](#ejemplos-de-carpetas-por-mÃ³dulo)
+- [Accesos rÃ¡pidos a mÃ³dulos](#accesos-rÃ¡pidos-a-mÃ³dulos)
+- [PrÃ¡cticas por mÃ³dulo (auto)](#prÃ¡cticas-por-mÃ³dulo-auto)
 - [Contribuir](#contribuir)
-- [FAQ](#faq)
-- [CrÃ©ditos](#crÃ©ditos)
 - [Licencia](#licencia)
 
 ---
@@ -81,7 +71,7 @@ Incluye material de las siguientes asignaturas:
 â”‚  â”œâ”€ practicas/
 â”‚  â”œâ”€ tests/
 â”‚  â””â”€ notas.md
-â”œâ”€ 05-programacion-multimedia-moviles/   â† â­ Curso destacado (25â€“26)
+â”œâ”€ 05-programacion-multimedia-moviles/
 â”‚  â”œâ”€ android/
 â”‚  â”œâ”€ kotlin/
 â”‚  â”œâ”€ practicas/
@@ -91,124 +81,8 @@ Incluye material de las siguientes asignaturas:
 â”‚  â”œâ”€ reports/
 â”‚  â”œâ”€ practicas/
 â”‚  â””â”€ notas.md
-â”œâ”€ docs/                  # capturas, GIFs, diagramas
+â”œâ”€ docs/           # capturas, GIFs, diagramas
 â”œâ”€ .github/
 â”‚  â”œâ”€ ISSUE_TEMPLATE/
 â”‚  â””â”€ PULL_REQUEST_TEMPLATE.md
 â””â”€ README.md
-
-
----
-
-## Accesos rÃ¡pidos a mÃ³dulos
-
-- [01 â€” Acceso a Datos](01-acceso-datos/README.md)
-- [02 â€” ComputaciÃ³n Descentralizada y Blockchain](02-computacion-descentralizada-blockchain/README.md)
-- [03 â€” Desarrollo de Interfaces](03-desarrollo-interfaces/README.md)
-- [04 â€” ProgramaciÃ³n de Servicios y Procesos](04-programacion-servicios-procesos/README.md)
-- [05 â€” ProgramaciÃ³n Multimedia y Dispositivos MÃ³viles](05-programacion-multimedia-moviles/README.md)
-- [06 â€” Sistemas de GestiÃ³n Empresarial](06-sistemas-gestion-empresarial/README.md)
-
-<p align="center">
-  <a href="01-acceso-datos/README.md"><img src="https://img.shields.io/badge/01%20%E2%80%94%20Acceso%20a%20Datos-303f9f?style=for-the-badge" alt="Acceso a Datos"></a>
-  <a href="02-computacion-descentralizada-blockchain/README.md"><img src="https://img.shields.io/badge/02%20%E2%80%94%20CDB-00695c?style=for-the-badge" alt="ComputaciÃ³n Descentralizada y Blockchain"></a>
-  <a href="03-desarrollo-interfaces/README.md"><img src="https://img.shields.io/badge/03%20%E2%80%94%20Desarrollo%20de%20Interfaces-512da8?style=for-the-badge" alt="Desarrollo de Interfaces"></a>
-  <a href="04-programacion-servicios-procesos/README.md"><img src="https://img.shields.io/badge/04%20%E2%80%94%20PSP-455a64?style=for-the-badge" alt="PSP"></a>
-  <a href="05-programacion-multimedia-moviles/README.md"><img src="https://img.shields.io/badge/05%20%E2%80%94%20PMDM-E91E63?style=for-the-badge" alt="PMDM"></a>
-  <a href="06-sistemas-gestion-empresarial/README.md"><img src="https://img.shields.io/badge/06%20%E2%80%94%20SGE-009688?style=for-the-badge" alt="SGE"></a>
-</p>
-
-
-## ï¿½ï¿½ï¿½ Accesos rÃ¡pidos (nueva pestaÃ±a)
-
-<ul>
-  <li><a href="01-acceso-datos/README.md" target="_blank" rel="noopener noreferrer">01 â€” Acceso a Datos (AD)</a></li>
-  <li><a href="02-computacion-descentralizada-blockchain/README.md" target="_blank" rel="noopener noreferrer">02 â€” ComputaciÃ³n Descentralizada y Blockchain (CDB)</a></li>
-  <li><a href="03-desarrollo-interfaces/README.md" target="_blank" rel="noopener noreferrer">03 â€” Desarrollo de Interfaces (DI)</a></li>
-  <li><a href="04-programacion-servicios-procesos/README.md" target="_blank" rel="noopener noreferrer">04 â€” ProgramaciÃ³n de Servicios y Procesos (PSP)</a></li>
-  <li><a href="05-programacion-multimedia-moviles/README.md" target="_blank" rel="noopener noreferrer">05 â€” ProgramaciÃ³n Multimedia y Dispositivos MÃ³viles (PMDM)</a></li>
-  <li><a href="06-sistemas-gestion-empresarial/README.md" target="_blank" rel="noopener noreferrer">06 â€” Sistemas de GestiÃ³n Empresarial (SGE)</a></li>
-</ul>
-
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<h3>?? Prácticas por módulo (auto)</h3>
-<!-- TABLA_PRACTICAS_INICIO -->
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left;">Módulo</th>
-      <th style="text-align:center;">N.º prácticas</th>
-      <th style="text-align:left;">Listado</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="01-acceso-datos/README.md" target="_blank" rel="noopener noreferrer">Acceso a Datos (AD)</a></td>
-      <td style="text-align:center;">3</td>
-      <td>- <a href="01-acceso-datos/practicas/examen-dia-22-10-2025/README.md" target="_blank" rel="noopener noreferrer">examen-dia-22-10-2025</a><br/>
-- <a href="01-acceso-datos/practicas/p01-crud-sql/README.md" target="_blank" rel="noopener noreferrer">p01-crud-sql</a><br/>
-- <a href="01-acceso-datos/practicas/prueba2/README.md" target="_blank" rel="noopener noreferrer">prueba2</a><br/>
-</td>
-    </tr>
-    <tr>
-      <td><a href="02-computacion-descentralizada-blockchain/README.md" target="_blank" rel="noopener noreferrer">ComputaciÃ³n Descentralizada y Blockchain (CDB)</a></td>
-      <td style="text-align:center;">0</td>
-      <td>(sin prácticas todavía)</td>
-    </tr>
-    <tr>
-      <td><a href="03-desarrollo-interfaces/README.md" target="_blank" rel="noopener noreferrer">Desarrollo de Interfaces (DI)</a></td>
-      <td style="text-align:center;">1</td>
-      <td>- <a href="03-desarrollo-interfaces/practicas/p01-layouts/README.md" target="_blank" rel="noopener noreferrer">p01-layouts</a><br/>
-</td>
-    </tr>
-    <tr>
-      <td><a href="04-programacion-servicios-procesos/README.md" target="_blank" rel="noopener noreferrer">ProgramaciÃ³n de Servicios y Procesos (PSP)</a></td>
-      <td style="text-align:center;">0</td>
-      <td>(sin prácticas todavía)</td>
-    </tr>
-    <tr>
-      <td><a href="05-programacion-multimedia-moviles/README.md" target="_blank" rel="noopener noreferrer">ProgramaciÃ³n Multimedia y Dispositivos MÃ³viles (PMDM) â€” 25â€“26</a></td>
-      <td style="text-align:center;">0</td>
-      <td>(sin prácticas todavía)</td>
-    </tr>
-    <tr>
-      <td><a href="06-sistemas-gestion-empresarial/README.md" target="_blank" rel="noopener noreferrer">Sistemas de GestiÃ³n Empresarial (SGE)</a></td>
-      <td style="text-align:center;">0</td>
-      <td>(sin prácticas todavía)</td>
-    </tr>
-  </tbody>
-</table>
-<!-- TABLA_PRACTICAS_FIN -->
