@@ -20,7 +20,7 @@ Persistencia, JDBC/JPA/Hibernate, ORM, SQL, XML/JSON, DAO/Repositorios.
 
 <!-- LISTA_PRACTICAS_MODULO_INICIO -->
 
-- [p01-crud-sql](01-acceso-datos//practicas/p01-crud-sql/README.md)
+- [p01-crud-sql](./practicas/p01-crud-sql/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
 

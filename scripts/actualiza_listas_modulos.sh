@@ -14,12 +14,14 @@ for mod in 0*-*/ ; do
     echo "$START"
     echo
     if [ -d "$mod/practicas" ] && find "$mod/practicas" -mindepth 1 -maxdepth 1 -type d | grep -q .; then
+      # Enlaces RELATIVOS al README del MÓDULO
       find "$mod/practicas" -mindepth 1 -maxdepth 1 -type d | sort | while read -r p; do
         name="$(basename "$p")"
         if [ -f "$p/README.md" ]; then
-          echo "- [$name]($p/README.md)"
+          # ./practicas/<name>/README.md
+          echo "- [$name](./practicas/$name/README.md)"
         else
-          echo "- [$name]($p)"
+          echo "- [$name](./practicas/$name/)"
         fi
       done
     else
@@ -39,6 +41,7 @@ for mod in 0*-*/ ; do
       }
     ' "$f" > "$f.tmp" && mv "$f.tmp" "$f"
   else
+    # Inserta justo tras "## Prácticas" o al final si no existe
     if grep -n '^## Prácticas' "$f" >/dev/null; then
       awk -v TMPF="$tmp" '
         BEGIN{done=0}
@@ -59,3 +62,4 @@ for mod in 0*-*/ ; do
 done
 
 echo "Listas de prácticas actualizadas en cada módulo."
+

@@ -20,7 +20,7 @@ UI/UX, layouts, componentes, estilos, accesibilidad.
 
 <!-- LISTA_PRACTICAS_MODULO_INICIO -->
 
-- [p01-layouts](03-desarrollo-interfaces//practicas/p01-layouts/README.md)
+- [p01-layouts](./practicas/p01-layouts/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
 
