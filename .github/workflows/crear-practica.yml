@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
     inputs:
       issue_number:
-        description: "Número del issue a procesar"
-        required: true
+        description: "Número del issue a procesar (solo si lo ejecutas manualmente)"
+        required: false
         type: string
 
 permissions:
@@ -16,17 +16,15 @@ permissions:
 
 jobs:
   crear:
-    if: |
+    # Permitimos ejecución manual o por issue etiquetado/abierto con el formulario
+    if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'issues' && (
-        (github.event.action == 'opened' &&
-         contains(github.event.issue.body, '### Autor/a') &&
-         contains(github.event.issue.body, '### Módulo') &&
-         contains(github.event.issue.body, '### Nombre de la práctica (slug)') &&
-         contains(github.event.issue.body, '### Archivo principal (con extensión)')) ||
+        (github.event.action == 'opened' && contains(github.event.issue.body, '### Autor/a')) ||
         (github.event.action == 'labeled' && github.event.label.name == 'nueva-practica')
       ))
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -35,12 +33,32 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const {owner, repo} = context.repo;
+            const { owner, repo } = context.repo;
             let issue, num;
 
+            // Si se ejecuta manualmente, tomamos el input; si no está, buscamos el último "nueva-practica"
+            async function pickIssue() {
+              const input = core.getInput('issue_number');
+              if (input) {
+                const n = parseInt(input, 10);
+                if (!Number.isFinite(n)) core.setFailed(`issue_number inválido: ${input}`);
+                const resp = await github.rest.issues.get({ owner, repo, issue_number: n });
+                return resp.data;
+              }
+              const list = await github.paginate(github.rest.issues.listForRepo, {
+                owner, repo, state: 'open', labels: 'nueva-practica', per_page: 1
+              });
+              if (!list.length) {
+                core.setFailed('No se proporcionó issue_number y no hay issues abiertos con la etiqueta "nueva-practica".');
+                return null;
+              }
+              return list[0];
+            }
+
             if (context.eventName === 'workflow_dispatch') {
-              num = parseInt(core.getInput('issue_number', {required:true}));
-              issue = (await github.rest.issues.get({owner, repo, issue_number: num})).data;
+              issue = await pickIssue();
+              if (!issue) return; // ya se marcó fallo arriba
+              num = issue.number;
             } else {
               issue = context.payload.issue;
               num = issue.number;
@@ -61,7 +79,7 @@ jobs:
             const contenido= campo('Contenido inicial del archivo principal');
 
             function slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,''); }
-            practica = slugify(practica);
+            practica = slugify(practica || '');
             archivo  = (archivo||'main.txt').replace(/^[\\/]+/,'').replace(/\s+/g,'-');
             if(!/\./.test(archivo)) archivo += '.txt';
 
@@ -79,37 +97,44 @@ jobs:
             }
 
             const fs = require('fs');
-            fs.writeFileSync('contenido_tmp.txt', contenido || '', {encoding:'utf8'});
+            fs.writeFileSync('contenido_tmp.txt', contenido || '', { encoding: 'utf8' });
 
-            // Variables de entorno para los siguientes pasos (con fallback)
             core.exportVariable('ISSUE_NUMBER', String(num));
-            core.exportVariable('AUTOR', autor || 'Anónimo');
+            core.exportVariable('AUTOR', autor || '');
             core.exportVariable('MOD', modulo);
             core.exportVariable('PRAC', practica);
             core.exportVariable('FILE', archivo);
             core.exportVariable('CONTENT_FILE', 'contenido_tmp.txt');
 
-      - name: Crea estructura y archivos de la práctica (sin heredoc)
+      - name: Crea estructura y archivos de la práctica
         shell: bash
         run: |
           set -e
           mkdir -p "$MOD/practicas/$PRAC"
 
-          {
-            printf '# %s\n\n' "${PRAC}"
-            printf '**Autor/a:** %s\n\n' "${AUTOR:-Anónimo}"
-            printf '## Objetivo\n'
-            printf 'Describe el objetivo de la práctica.\n\n'
-            printf '## Requisitos\n'
-            printf '- …\n\n'
-            printf '## Pasos\n'
-            printf '1. …\n2. …\n\n'
-            printf '## Cómo ejecutar\n'
-            printf '```bash\n'
-            printf '# comandos\n'
-            printf '```\n'
-          } > "$MOD/practicas/$PRAC/README.md"
+          # README de la práctica (aquí NO hay YAML, es un heredoc plano)
+          cat > "$MOD/practicas/$PRAC/README.md" <<'EOT'
+          # ${PRAC}
 
+          **Autor/a:** ${AUTOR}
+
+          ## Objetivo
+          Describe el objetivo de la práctica.
+
+          ## Requisitos
+          - …
+
+          ## Pasos
+          1. …
+          2. …
+
+          ## Cómo ejecutar
+          ```bash
+          # comandos
+          ```
+          EOT
+
+          # Archivo principal (o placeholder)
           if [ -s "$CONTENT_FILE" ]; then
             cp "$CONTENT_FILE" "$MOD/practicas/$PRAC/$FILE"
           else
@@ -138,11 +163,12 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const {owner, repo} = context.repo;
-            const num  = parseInt(process.env.ISSUE_NUMBER);
-            const mod  = process.env.MOD;
+            const { owner, repo } = context.repo;
+            const num = parseInt(process.env.ISSUE_NUMBER, 10);
+            const branch = (context.ref || 'refs/heads/main').replace('refs/heads/','');
+            const mod = process.env.MOD;
             const prac = process.env.PRAC;
-            const url  = `${context.payload.repository.html_url}/${mod}/practicas/${prac}/README.md`.replace(/\/\/+/g,'/');
-            const msg  = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas por módulo y \`docs/INDICE.md\`.`;
+            const url = `${context.payload.repository.html_url}/blob/${branch}/${mod}/practicas/${prac}/README.md`;
+            const msg = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
             await github.rest.issues.createComment({ owner, repo, issue_number: num, body: msg });
             await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed' });
