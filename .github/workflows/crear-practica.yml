@@ -3,6 +3,12 @@ name: Crear práctica desde Issue
 on:
   issues:
     types: [opened, labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Número del issue a procesar"
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -10,24 +16,49 @@ permissions:
 
 jobs:
   crear:
-    if: github.event_name == 'issues' && (
-      (github.event.action == 'opened' &&
-       contains(github.event.issue.body, '### Autor/a') &&
-       contains(github.event.issue.body, '### Módulo') &&
-       contains(github.event.issue.body, '### Nombre de la práctica (slug)') &&
-       contains(github.event.issue.body, '### Archivo principal (con extensión)')) ||
-      (github.event.action == 'labeled' && github.event.label.name == 'nueva-practica')
-    )
+    # Ejecuta si:
+    # - Evento de issues y viene del formulario (sin etiqueta), o
+    # - Evento de issues y se añadió la etiqueta 'nueva-practica', o
+    # - Ejecución manual (workflow_dispatch)
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' && (
+        (github.event.action == 'opened' &&
+         contains(github.event.issue.body, '### Autor/a') &&
+         contains(github.event.issue.body, '### Módulo') &&
+         contains(github.event.issue.body, '### Nombre de la práctica (slug)') &&
+         contains(github.event.issue.body, '### Archivo principal (con extensión)')) ||
+        (github.event.action == 'labeled' && github.event.label.name == 'nueva-practica')
+      ))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Extrae datos del issue
+      - name: Carga datos del issue (auto o manual)
+        id: carga
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const isManual = context.eventName === 'workflow_dispatch';
+            let issue;
+            if (isManual) {
+              const num = parseInt(core.getInput('issue_number'));
+              const {data} = await github.rest.issues.get({
+                owner: context.repo.owner, repo: context.repo.repo, issue_number: num
+              });
+              issue = data;
+            } else {
+              issue = context.payload.issue;
+            }
+            core.setOutput('number', issue.number.toString());
+            core.setOutput('body', issue.body || '');
+
+      - name: Extrae campos del formulario
         id: datos
         uses: actions/github-script@v7
         with:
           script: |
-            const body = context.payload.issue.body || '';
+            const body = `${{ steps.carga.outputs.body }}`;
             function campo(h){
               const re = new RegExp(`(?<=^|\\n)\\s*###\\s*${h}[\\r\\n]+([\\s\\S]*?)(?=\\n###\\s|$)`,'i');
               const m = body.match(re);
@@ -44,7 +75,7 @@ jobs:
             archivo  = archivo.replace(/^[\\/]+/,'').replace(/\\s+/g,'-');
             if(!/\\./.test(archivo)) archivo += '.txt';
 
-            const modValid = [
+            const mods = [
               '01-acceso-datos',
               '02-computacion-descentralizada-blockchain',
               '03-desarrollo-interfaces',
@@ -52,7 +83,7 @@ jobs:
               '05-programacion-multimedia-moviles',
               '06-sistemas-gestion-empresarial'
             ];
-            if(!modValid.includes(modulo)){ core.setFailed('Módulo no válido: '+modulo); return; }
+            if(!mods.includes(modulo)) { core.setFailed('Módulo no válido: '+modulo); return; }
 
             core.setOutput('autor', autor);
             core.setOutput('modulo', modulo);
@@ -62,6 +93,7 @@ jobs:
 
       - name: Crea estructura y archivos
         run: |
+          set -e
           MOD='${{ steps.datos.outputs.modulo }}'
           PRAC='${{ steps.datos.outputs.practica }}'
           FILE='${{ steps.datos.outputs.archivo }}'
@@ -85,7 +117,7 @@ EOT
           if [ -n "${{ steps.datos.outputs.contenido }}" ]; then
             printf "%b" "${{ steps.datos.outputs.contenido }}" > "$MOD/practicas/$PRAC/$FILE"
           else
-            echo "# Pega aquí tu código para $FILE" > "$MOD/practicas/$PRAC/$FILE"
+            echo "// Pega aquí tu código para $FILE" > "$MOD/practicas/$PRAC/$FILE"
           fi
 
       - name: Actualiza índice/listas/tabla
@@ -99,18 +131,19 @@ EOT
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "${{ steps.datos.outputs.modulo }}/practicas/${{ steps.datos.outputs.practica }}" README.md docs/INDICE.md 0*/README.md || true
+          git add README.md docs/INDICE.md 0*/README.md "${{ steps.datos.outputs.modulo }}/practicas/${{ steps.datos.outputs.practica }}" || true
           git commit -m "feat(${{ steps.datos.outputs.modulo }}): añade práctica ${{ steps.datos.outputs.practica }} + docs auto [skip ci]" || echo "Nada que commitear"
           git push
 
-      - name: Comenta con el enlace y cierra el issue
+      - name: Comenta enlace y cierra issue
+        if: ${{ always() && github.event_name != 'workflow_dispatch' }}
         uses: actions/github-script@v7
         with:
           script: |
-            const mod = '${{ steps.datos.outputs.modulo }}';
-            const prac= '${{ steps.datos.outputs.practica }}';
-            const url = `${context.payload.repository.html_url}/${mod}/practicas/${prac}/README.md`.replace(/\/\/+/g,'/');
-            const body = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
-            await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number, body });
-            await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number, state: 'closed' });
-
+            const num  = parseInt('${{ steps.carga.outputs.number }}');
+            const mod  = '${{ steps.datos.outputs.modulo }}';
+            const prac = '${{ steps.datos.outputs.practica }}';
+            const url  = `${context.payload.repository.html_url}/${mod}/practicas/${prac}/README.md`.replace(/\/\/+/g,'/');
+            const msg  = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
+            await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: num, body: msg });
+            await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: num, state: 'closed' });
