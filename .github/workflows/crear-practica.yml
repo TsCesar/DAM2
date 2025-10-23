@@ -10,8 +10,15 @@ permissions:
 
 jobs:
   crear:
+    # Dispara si:
+    # 1) Se abre un issue cuyo cuerpo tiene los campos del formulario (sin depender de labels), o
+    # 2) Se etiqueta con 'nueva-practica'
     if: >
-      (github.event.action == 'opened'  && contains(github.event.issue.labels.*.name, 'nueva-practica')) ||
+      (github.event.action == 'opened' &&
+       contains(github.event.issue.body, '### Autor/a') &&
+       contains(github.event.issue.body, '### Módulo') &&
+       contains(github.event.issue.body, '### Nombre de la práctica (slug)') &&
+       contains(github.event.issue.body, '### Archivo principal (con extensión)')) ||
       (github.event.action == 'labeled' && github.event.label.name == 'nueva-practica')
     runs-on: ubuntu-latest
     steps:
@@ -31,7 +38,7 @@ jobs:
             const autor = campo('Autor/a');
             const modulo = campo('Módulo').toLowerCase();
             let practica = campo('Nombre de la práctica \\(slug\\)') || campo('Nombre de la práctica');
-            let archivo = campo('Archivo principal \\(con extensión\\)') || 'main.txt';
+            let archivo  = campo('Archivo principal \\(con extensión\\)') || 'main.txt';
             const contenido = campo('Contenido inicial del archivo principal');
 
             function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,''); }
@@ -108,3 +115,4 @@ EOT
             const body = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
             await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number, body });
             await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number, state: 'closed' });
+
