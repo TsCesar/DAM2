@@ -2,7 +2,7 @@ name: Crear práctica desde Issue
 
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
 
 permissions:
   contents: write
@@ -10,7 +10,9 @@ permissions:
 
 jobs:
   crear:
-    if: contains(github.event.issue.labels.*.name, 'nueva-practica')
+    if: >
+      (github.event.action == 'opened'  && contains(github.event.issue.labels.*.name, 'nueva-practica')) ||
+      (github.event.action == 'labeled' && github.event.label.name == 'nueva-practica')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,7 +37,7 @@ jobs:
             function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,''); }
             practica = slugify(practica);
             archivo  = archivo.replace(/^[\\/]+/,'').replace(/\\s+/g,'-');
-            if(!/\\./.test(archivo)) archivo += '.txt'; // añade .txt si falta extensión
+            if(!/\\./.test(archivo)) archivo += '.txt';
 
             const modValid = [
               '01-acceso-datos',
