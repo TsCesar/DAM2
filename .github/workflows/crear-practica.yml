@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   crear:
-    # Permitimos ejecución manual o por issue etiquetado/abierto con el formulario
+    # Permite ejecución manual o por issue etiquetado/abierto con el formulario
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'issues' && (
@@ -36,7 +36,6 @@ jobs:
             const { owner, repo } = context.repo;
             let issue, num;
 
-            // Si se ejecuta manualmente, tomamos el input; si no está, buscamos el último "nueva-practica"
             async function pickIssue() {
               const input = core.getInput('issue_number');
               if (input) {
@@ -106,11 +105,10 @@ jobs:
             core.exportVariable('FILE', archivo);
             core.exportVariable('CONTENT_FILE', 'contenido_tmp.txt');
 
-      # === SUSTITUCIÓN: paso mínimo (autor + código) ===
       - name: Crea estructura y archivos (README mínimo: autor + código)
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
           root="$MOD/practicas/$PRAC"
           mkdir -p "$root"
 
@@ -139,8 +137,7 @@ jobs:
 
           # README mínimo (solo autor + bloque con el código)
           {
-            echo "**Autor/a:** ${AUTOR:-Desconocido}"
-            echo
+            printf "**Autor/a:** %s\n\n" "${AUTOR:-Desconocido}"
             echo '```'"$lang"
             cat "$root/$FILE"
             echo '```'
@@ -150,9 +147,9 @@ jobs:
         shell: bash
         run: |
           chmod +x scripts/*.sh || true
-          scripts/actualiza_indice.sh || true
-          scripts/actualiza_listas_modulos.sh || true
-          scripts/actualiza_tabla_practicas.sh || true
+          ./scripts/actualiza_indice.sh || true
+          ./scripts/actualiza_listas_modulos.sh || true
+          ./scripts/actualiza_tabla_practicas.sh || true
 
       - name: Commit y push
         shell: bash
@@ -174,6 +171,6 @@ jobs:
             const mod = process.env.MOD;
             const prac = process.env.PRAC;
             const url = `${context.payload.repository.html_url}/blob/${branch}/${mod}/practicas/${prac}/README.md`;
-            const msg = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
+            const msg = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el README, las listas de cada módulo y docs/INDICE.md.`;
             await github.rest.issues.createComment({ owner, repo, issue_number: num, body: msg });
             await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed' });
