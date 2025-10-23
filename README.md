@@ -124,6 +124,7 @@ Incluye material de las siguientes asignaturas:
 Consulta todas las pr√°cticas por m√≥dulo en **[docs/INDICE.md](docs/INDICE.md)**.
 
 <h3>Ì≥ä Pr√°cticas por m√≥dulo (auto)</h3>
+<h3>Ì≥ä Pr√°cticas por m√≥dulo (auto)</h3>
 <!-- TABLA_PRACTICAS_INICIO -->
 <table>
   <thead>
@@ -167,6 +168,7 @@ Consulta todas las pr√°cticas por m√≥dulo en **[docs/INDICE.md](docs/INDICE.md)*
   </tbody>
 </table>
 <!-- TABLA_PRACTICAS_FIN -->
+
 
 
 ---
