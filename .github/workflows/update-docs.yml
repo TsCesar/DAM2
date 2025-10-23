@@ -2,49 +2,50 @@ name: Actualiza índice y tabla de prácticas
 
 on:
   push:
-    branches: [ "main" ]
-  schedule:
-    - cron: '10 4 * * *'   # diario 04:10 UTC
-  workflow_dispatch:
+    branches: [ main ]
+    paths:
+      - '01-*/**'
+      - '02-*/**'
+      - '03-*/**'
+      - '04-*/**'
+      - '05-*/**'
+      - '06-*/**'
+      - 'scripts/**'
+      - 'README.md'
+      - 'docs/**'
+  workflow_dispatch: {}
 
 permissions:
   contents: write
 
 jobs:
   build:
-    # Evita bucle si el propio bot dispara un push; permite schedule y manual
-    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
-      - name: Configura identidad de commit del bot
+      - name: Ejecuta generadores (tolerante a errores)
+        shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Asegura permisos de ejecución
-        run: |
+          set -e
           chmod +x scripts/*.sh || true
-
-
-      - name: Genera índice y listados + tabla
-        run: |
-          scripts/actualiza_indice.sh
-          scripts/actualiza_listas_modulos.sh
-          scripts/inserta_boton_practica.sh
-          scripts/actualiza_tabla_practicas.sh
-
+          ./scripts/actualiza_indice.sh || true
+          ./scripts/actualiza_listas_modulos.sh || true
+          ./scripts/actualiza_tabla_practicas.sh || true
 
       - name: Commit y push si hay cambios
+        shell: bash
         run: |
-          if ! git diff --quiet; then
-            git add README.md docs/INDICE.md 0*/README.md
-            git commit -m "docs: auto-actualiza índice, listas y tabla [skip ci]"
-            git push
-          else
-            echo "Sin cambios que subir."
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Evita fallar si no hay 0X-.../README.md que añadir
+          git add README.md docs/INDICE.md 0*/README.md || true
+
+          # Si no hay nada staged, salimos sin error
+          if git diff --cached --quiet; then
+            echo "No hay cambios que subir."
+            exit 0
           fi
+
+          git commit -m "docs: auto-actualiza índice, listas y tabla [skip ci]"
+          git push
