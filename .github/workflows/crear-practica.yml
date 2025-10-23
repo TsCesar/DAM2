@@ -109,36 +109,23 @@ jobs:
           MOD:  ${{ steps.datos.outputs.mod }}
           PRAC: ${{ steps.datos.outputs.prac }}
           FILE: ${{ steps.datos.outputs.file }}
-          AUTOR:${{ steps.datos.outputs.autor }}
+          AUTOR: ${{ steps.datos.outputs.autor }}
         run: |
           set -e
           root="$MOD/practicas/$PRAC"
           mkdir -p "$root"
-
-          # Archivo principal
           if [ -s "contenido_tmp.txt" ]; then
             cp "contenido_tmp.txt" "$root/$FILE"
           else
             printf "// Pega aquí tu código para %s\n" "$FILE" > "$root/$FILE"
           fi
-
-          # Detección de lenguaje para el bloque de código
           ext="${FILE##*.}"
           case "$ext" in
-            java) lang=java ;;
-            kt)   lang=kotlin ;;
-            py)   lang=python ;;
-            js)   lang=javascript ;;
-            ts)   lang=typescript ;;
-            html) lang=html ;;
-            css)  lang=css ;;
-            xml)  lang=xml ;;
-            sql)  lang=sql ;;
-            md)   lang=markdown ;;
-            *)    lang="" ;;
+            java) lang=java ;; kt) lang=kotlin ;; py) lang=python ;;
+            js) lang=javascript ;; ts) lang=typescript ;;
+            html) lang=html ;; css) lang=css ;; xml) lang=xml ;;
+            sql) lang=sql ;; md) lang=markdown ;; *) lang="" ;;
           esac
-
-          # README mínimo (sin heredocs peligrosos)
           {
             printf '**Autor/a:** %s\n\n' "${AUTOR:-Desconocido}"
             if [ -n "$lang" ]; then printf '```%s\n' "$lang"; else printf '```\n'; fi
