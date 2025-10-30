@@ -23,7 +23,7 @@ Hilos, concurrencia, IPC, sockets, servicios REST.
 
 <!-- LISTA_PRACTICAS_MODULO_INICIO -->
 
-_(sin prácticas todavía)_
+- [psp](./practicas/psp/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
 
