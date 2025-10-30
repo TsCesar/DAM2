@@ -93,6 +93,7 @@ Incluye material de:
 ****
 
 <h3>?? Prácticas por módulo (auto)</h3>
+<h3>?? Prácticas por módulo (auto)</h3>
 <!-- TABLA_PRACTICAS_INICIO -->
 <table>
   <thead>
@@ -116,8 +117,9 @@ Incluye material de:
     </tr>
     <tr>
       <td><a href="03-desarrollo-interfaces/README.md" target="_blank" rel="noopener noreferrer">Desarrollo de Interfaces (DI)</a></td>
-      <td style="text-align:center;">1</td>
-      <td>- <a href="03-desarrollo-interfaces/practicas/p01-layouts/README.md" target="_blank" rel="noopener noreferrer">p01-layouts</a><br/>
+      <td style="text-align:center;">2</td>
+      <td>- <a href="03-desarrollo-interfaces/practicas/interfaces/README.md" target="_blank" rel="noopener noreferrer">interfaces</a><br/>
+- <a href="03-desarrollo-interfaces/practicas/p01-layouts/README.md" target="_blank" rel="noopener noreferrer">p01-layouts</a><br/>
 </td>
     </tr>
     <tr>

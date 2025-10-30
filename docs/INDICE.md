@@ -1,7 +1,7 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-10-30 12:22:19_
+_Actualizado: 2025-10-30 12:30:39_
 
 ## Acceso a Datos (AD)
 
@@ -13,6 +13,7 @@ _Actualizado: 2025-10-30 12:22:19_
 
 ## Desarrollo de Interfaces (DI)
 
+- [interfaces](03-desarrollo-interfaces//practicas/interfaces/README.md)
 - [p01-layouts](03-desarrollo-interfaces//practicas/p01-layouts/README.md)
 
 ## Programación de Servicios y Procesos (PSP)
