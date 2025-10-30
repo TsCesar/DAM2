@@ -32,7 +32,6 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
             let issue, num;
-
             async function pickIssue() {
               const input = core.getInput('issue_number');
               if (input) {
@@ -50,7 +49,6 @@ jobs:
               }
               return { issue: list[0], num: list[0].number };
             }
-
             if (context.eventName === 'workflow_dispatch') {
               ({ issue, num } = await pickIssue());
               if (!issue) return;
@@ -58,7 +56,6 @@ jobs:
               issue = context.payload.issue;
               num = issue.number;
             }
-
             const body = issue.body || '';
             const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
             const campo = h => {
@@ -66,19 +63,16 @@ jobs:
               const m = body.match(re);
               return m ? m[1].trim() : '';
             };
-
             const autor     = campo('Autor/a');
             const moduloRaw = (campo('Módulo') || '').toLowerCase();
             let practica    = campo('Nombre de la práctica (slug)') || campo('Nombre de la práctica');
             let archivo     = campo('Archivo principal (con extensión)') || 'main.txt';
             const contenido = campo('Contenido inicial del archivo principal');
-
             const slugify = s => (s||'').toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,'');
             const modulo = moduloRaw;
             practica = slugify(practica || '');
             archivo  = (archivo||'main.txt').replace(/^[\\/]+/,'').replace(/\s+/g,'-');
             if (!/\./.test(archivo)) archivo += '.txt';
-
             const valid = [
               '01-acceso-datos',
               '02-computacion-descentralizada-blockchain',
@@ -91,11 +85,9 @@ jobs:
               core.setFailed(`Módulo no válido: ${modulo}`);
               return;
             }
-
             // Guarda contenido temporal
             const fs = require('fs');
             fs.writeFileSync('contenido_tmp.txt', contenido || '', { encoding: 'utf8' });
-
             // Outputs
             core.setOutput('issue_number', String(num));
             core.setOutput('autor', autor || '');
@@ -103,7 +95,7 @@ jobs:
             core.setOutput('prac', practica);
             core.setOutput('file', archivo);
 
-      # ===== NUEVO: bloquea slugs duplicados =====
+      # ===== Verifica slug duplicado =====
       - name: Verifica que el slug no exista ya
         shell: bash
         env:
@@ -156,6 +148,12 @@ jobs:
           scripts/actualiza_listas_modulos.sh || true
           scripts/actualiza_tabla_practicas.sh || true
 
+      # ===== Nuevo: NO commitear cambios al README de la raíz =====
+      - name: No tocar README de la raíz (descarta cambios si los scripts lo editaron)
+        shell: bash
+        run: |
+          git restore --source=HEAD --staged --worktree README.md || true
+
       - name: Commit y push
         shell: bash
         env:
@@ -165,11 +163,16 @@ jobs:
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md docs/INDICE.md 0*/README.md "$MOD/practicas/$PRAC" || true
-          git commit -m "feat(${MOD}): añade práctica ${PRAC} + docs auto [skip ci]" || echo "Nada que commitear"
-          git push
+          # NO añadimos README.md de la raíz
+          git add docs/INDICE.md 0*/README.md "$MOD/practicas/$PRAC" || true
+          if git diff --cached --quiet; then
+            echo "Nada que commitear"
+          else
+            git commit -m "feat(${MOD}): añade práctica ${PRAC} + docs auto [skip ci]"
+            git push
+          fi
 
-      # ===== NUEVO: comenta si hubo slug duplicado =====
+      # ===== Notifica duplicado en el issue =====
       - name: Notifica duplicado en el issue (si aplica)
         if: ${{ always() && env.EXISTS == '1' && github.event_name != 'workflow_dispatch' }}
         uses: actions/github-script@v7
@@ -193,6 +196,6 @@ jobs:
             const prac  = '${{ steps.datos.outputs.prac }}';
             const ref   = (context.ref || 'refs/heads/main').replace('refs/heads/','');
             const url   = `${context.payload.repository.html_url}/blob/${ref}/${mod}/practicas/${prac}/README.md`;
-            const msg   = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado el **README**, las listas de cada módulo y \`docs/INDICE.md\`.`;
+            const msg   = `✅ Práctica creada: [${prac}](${url})\n\nSe han actualizado las listas de cada módulo y \`docs/INDICE.md\`.`;
             await github.rest.issues.createComment({ owner, repo, issue_number: num, body: msg });
             await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed' });
