@@ -1,7 +1,7 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-10-30 12:30:39_
+_Actualizado: 2025-11-05 08:22:45_
 
 ## Acceso a Datos (AD)
 
@@ -26,5 +26,5 @@ _Actualizado: 2025-10-30 12:30:39_
 
 ## Sistemas de Gestión Empresarial (SGE)
 
-*(sin prácticas todavía)*
+- [ejercicios](06-sistemas-gestion-empresarial//practicas/ejercicios/README.md)
 
