@@ -23,6 +23,7 @@ ERPs, flujos de negocio, reporting, integración.
 
 <!-- LISTA_PRACTICAS_MODULO_INICIO -->
 
+- [correccion-del-examen](./practicas/correccion-del-examen/README.md)
 - [ejercicios](./practicas/ejercicios/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
