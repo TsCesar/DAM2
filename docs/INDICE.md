@@ -1,7 +1,7 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-11-10 08:33:04_
+_Actualizado: 2025-11-17 09:43:02_
 
 ## Acceso a Datos (AD)
 
@@ -22,7 +22,7 @@ _Actualizado: 2025-11-10 08:33:04_
 
 ## Programación Multimedia y Dispositivos Móviles (PMDM) — 25–26
 
-*(sin prácticas todavía)*
+- [prueba-examen-1](05-programacion-multimedia-moviles//practicas/prueba-examen-1/README.md)
 
 ## Sistemas de Gestión Empresarial (SGE)
 
