@@ -24,6 +24,7 @@ Hilos, concurrencia, IPC, sockets, servicios REST.
 <!-- LISTA_PRACTICAS_MODULO_INICIO -->
 
 - [psp](./practicas/psp/README.md)
+- [segundo-examen](./practicas/segundo-examen/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
 

@@ -1,7 +1,7 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-11-17 09:43:02_
+_Actualizado: 2025-11-17 10:13:28_
 
 ## Acceso a Datos (AD)
 
@@ -19,6 +19,7 @@ _Actualizado: 2025-11-17 09:43:02_
 ## Programación de Servicios y Procesos (PSP)
 
 - [psp](04-programacion-servicios-procesos//practicas/psp/README.md)
+- [segundo-examen](04-programacion-servicios-procesos//practicas/segundo-examen/README.md)
 
 ## Programación Multimedia y Dispositivos Móviles (PMDM) — 25–26
 
