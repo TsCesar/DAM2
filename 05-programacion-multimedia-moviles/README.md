@@ -24,6 +24,7 @@ Apps móviles, multimedia, sensores, ciclo de vida, almacenamiento.
 <!-- LISTA_PRACTICAS_MODULO_INICIO -->
 
 - [prueba-examen-1](./practicas/prueba-examen-1/README.md)
+- [prueba-examen-2](./practicas/prueba-examen-2/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
 
