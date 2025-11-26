@@ -1,10 +1,11 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-11-26 11:38:04_
+_Actualizado: 2025-11-26 11:43:05_
 
 ## Acceso a Datos (AD)
 
+- [examen-26-11-2025](01-acceso-datos//practicas/examen-26-11-2025/README.md)
 - [examen-dia-22-10-2025](01-acceso-datos//practicas/examen-dia-22-10-2025/README.md)
 - [gestor](01-acceso-datos//practicas/gestor/README.md)
 
