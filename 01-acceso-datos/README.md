@@ -25,7 +25,6 @@ Persistencia, JDBC/JPA/Hibernate, ORM, SQL, XML/JSON, DAO/Repositorios.
 
 - [examen-26-11-2025](./practicas/examen-26-11-2025/README.md)
 - [examen-dia-22-10-2025](./practicas/examen-dia-22-10-2025/README.md)
-- [gestor](./practicas/gestor/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
 
