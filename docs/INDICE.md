@@ -1,11 +1,12 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-11-19 07:42:02_
+_Actualizado: 2025-11-26 11:38:04_
 
 ## Acceso a Datos (AD)
 
 - [examen-dia-22-10-2025](01-acceso-datos//practicas/examen-dia-22-10-2025/README.md)
+- [gestor](01-acceso-datos//practicas/gestor/README.md)
 
 ## Computación Descentralizada y Blockchain (CDB)
 
