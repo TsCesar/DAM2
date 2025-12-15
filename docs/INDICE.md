@@ -1,7 +1,7 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-12-15 11:10:26_
+_Actualizado: 2025-12-15 11:11:58_
 
 ## Acceso a Datos (AD)
 
@@ -12,6 +12,7 @@ _Actualizado: 2025-12-15 11:10:26_
 
 ## Computación Descentralizada y Blockchain (CDB)
 
+- [banco-sencillo](02-computacion-descentralizada-blockchain//practicas/banco-sencillo/README.md)
 - [contador-sol](02-computacion-descentralizada-blockchain//practicas/contador-sol/README.md)
 - [hello-sol](02-computacion-descentralizada-blockchain//practicas/hello-sol/README.md)
 
