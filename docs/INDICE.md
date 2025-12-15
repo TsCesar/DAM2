@@ -1,7 +1,7 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-12-15 11:11:58_
+_Actualizado: 2025-12-15 11:13:11_
 
 ## Acceso a Datos (AD)
 
@@ -15,6 +15,7 @@ _Actualizado: 2025-12-15 11:11:58_
 - [banco-sencillo](02-computacion-descentralizada-blockchain//practicas/banco-sencillo/README.md)
 - [contador-sol](02-computacion-descentralizada-blockchain//practicas/contador-sol/README.md)
 - [hello-sol](02-computacion-descentralizada-blockchain//practicas/hello-sol/README.md)
+- [registro-asistencia](02-computacion-descentralizada-blockchain//practicas/registro-asistencia/README.md)
 
 ## Desarrollo de Interfaces (DI)
 

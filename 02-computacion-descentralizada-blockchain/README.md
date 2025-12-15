@@ -27,6 +27,7 @@ Nodos, contratos inteligentes, carteras (teoría/práctica), P2P, despliegues lo
 - [banco-sencillo](./practicas/banco-sencillo/README.md)
 - [contador-sol](./practicas/contador-sol/README.md)
 - [hello-sol](./practicas/hello-sol/README.md)
+- [registro-asistencia](./practicas/registro-asistencia/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
 
