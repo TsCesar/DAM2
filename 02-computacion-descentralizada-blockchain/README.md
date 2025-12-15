@@ -24,7 +24,7 @@ Nodos, contratos inteligentes, carteras (teoría/práctica), P2P, despliegues lo
 
 <!-- LISTA_PRACTICAS_MODULO_INICIO -->
 
-_(sin prácticas todavía)_
+- [hello-sol](./practicas/hello-sol/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
 

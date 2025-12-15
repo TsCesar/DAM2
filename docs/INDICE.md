@@ -1,7 +1,7 @@
 <!-- Archivo generado automáticamente. Edita las prácticas en sus carpetas. -->
 # Índice de prácticas
 
-_Actualizado: 2025-11-27 11:05:03_
+_Actualizado: 2025-12-15 11:06:49_
 
 ## Acceso a Datos (AD)
 
@@ -12,7 +12,7 @@ _Actualizado: 2025-11-27 11:05:03_
 
 ## Computación Descentralizada y Blockchain (CDB)
 
-*(sin prácticas todavía)*
+- [hello-sol](02-computacion-descentralizada-blockchain//practicas/hello-sol/README.md)
 
 ## Desarrollo de Interfaces (DI)
 
