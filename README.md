@@ -11,7 +11,7 @@
 <p align="center">
   <img alt="2º DAM" src="https://img.shields.io/badge/2%C2%BA%20DAM-25--26-673ab7?style=for-the-badge"/>
   <img alt="Tipo" src="https://img.shields.io/badge/Repositorio-educativo-03a9f4?style=for-the-badge"/>
-  <img alt="Lenguajes" src="https://img.shields.io/badge/Java%20%7C%20Kotlin%20%7C%20SQL%20%7C%20XML%20%7C%20Python-9c27b0?style=for-the-badge"/>
+  <img alt="Lenguajes" src="https://img.shields.io/badge/Java%20%7C%20KSolidity%20%7C%20SQL%20%7C%20XML%20%7C%20Python-9c27b0?style=for-the-badge"/>
   <img alt="License" src="https://img.shields.io/badge/Licencia-MIT-4caf50?style=for-the-badge"/>
 </p>
 
