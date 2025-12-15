@@ -28,6 +28,7 @@ Nodos, contratos inteligentes, carteras (teoría/práctica), P2P, despliegues lo
 - [contador-sol](./practicas/contador-sol/README.md)
 - [hello-sol](./practicas/hello-sol/README.md)
 - [registro-asistencia](./practicas/registro-asistencia/README.md)
+- [registro-de-votaciones-modificado](./practicas/registro-de-votaciones-modificado/README.md)
 - [registro-votacion](./practicas/registro-votacion/README.md)
 
 <!-- LISTA_PRACTICAS_MODULO_FIN -->
